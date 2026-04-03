@@ -1,0 +1,66 @@
+---
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const pathname = Astro.url.pathname;
+
+const navLinks = [
+  { href: base, label: 'Home' },
+  { href: `${base}/writing/`, label: 'Writing' },
+  { href: `${base}/youtube/`, label: 'YouTube' },
+  { href: `${base}/projects/`, label: 'Projects' },
+  { href: `${base}/about/`, label: 'About' },
+];
+
+function isActive(href: string): boolean {
+  const normalised = href.replace(/\/$/, '');
+  const normPath = pathname.replace(/\/$/, '');
+  if (normalised === base.replace(/\/$/, '')) {
+    return normPath === base.replace(/\/$/, '');
+  }
+  return normPath.startsWith(normalised);
+}
+---
+
+<nav class="nav" aria-label="Main navigation">
+  <div class="container nav-inner">
+    <a href={base} class="nav-logo">Devi Priya</a>
+
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <ul class="nav-links" id="nav-links" role="list">
+      {navLinks.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class={`nav-link${isActive(link.href) ? ' active' : ''}`}
+            aria-current={isActive(link.href) ? 'page' : undefined}
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</nav>
+
+<script>
+  const toggle = document.getElementById('nav-toggle');
+  const links = document.getElementById('nav-links');
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = links?.classList.contains('open');
+    toggle.setAttribute('aria-expanded', String(!isOpen));
+    links?.classList.toggle('open');
+  });
+
+  // Close menu when a link is clicked
+  links?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      links.classList.remove('open');
+      toggle?.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>

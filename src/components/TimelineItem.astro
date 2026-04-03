@@ -1,0 +1,19 @@
+---
+interface Props {
+  role: string;
+  company: string;
+  location: string;
+  note?: string;
+  isCurrent?: boolean;
+  isTransition?: boolean;
+}
+
+const { role, company, location, note, isCurrent = false, isTransition = false } = Astro.props;
+---
+
+<div class={`timeline-item${isCurrent ? ' current' : ''}${isTransition ? ' transition' : ''}`}>
+  <div class="timeline-dot" aria-hidden="true"></div>
+  <p class="timeline-role">{role}</p>
+  <p class="timeline-company">{company} &mdash; {location}</p>
+  {note && <p class="timeline-note">{note}</p>}
+</div>

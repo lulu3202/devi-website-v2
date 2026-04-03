@@ -1,0 +1,89 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Hero from '@components/Hero.astro';
+import ProjectCard from '@components/ProjectCard.astro';
+import ArticleCard from '@components/ArticleCard.astro';
+import { projects } from '@data/projects';
+import { articles } from '@data/articles';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const featuredProjects = projects.filter((p) => p.featured).slice(0, 3);
+const featuredArticles = articles.filter((a) => a.featured).slice(0, 3);
+---
+
+<BaseLayout title="Devi Priya K | Content + AI">
+  <Hero />
+
+  <!-- Featured Projects -->
+  <section class="section home-featured-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Featured Projects</h2>
+        <p>Applied AI work — built to learn, shared to teach.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+        {featuredProjects.map((project) => (
+          <ProjectCard
+            title={project.title}
+            description={project.description}
+            image={project.image}
+            tags={project.tags}
+            githubUrl={project.githubUrl}
+            blogUrl={project.blogUrl}
+            youtubeUrl={project.youtubeUrl}
+          />
+        ))}
+      </div>
+      <div class="home-section-cta">
+        <a href={`${base}/projects/`} class="btn btn-outline">See All Projects →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Latest Writing -->
+  <section class="section" style="background: var(--color-surface-alt);">
+    <div class="container">
+      <div class="section-header">
+        <h2>Latest Writing</h2>
+        <p>Beginner-friendly tutorials on AI tools, cloud, and GenAI applications.</p>
+      </div>
+      <div class="grid-3">
+        {featuredArticles.map((article) => (
+          <ArticleCard
+            title={article.title}
+            publication={article.publication}
+            url={article.url}
+            description={article.description}
+          />
+        ))}
+      </div>
+      <div class="home-section-cta">
+        <a href={`${base}/writing/`} class="btn btn-outline">Read All Articles →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- YouTube CTA -->
+  <section class="section">
+    <div class="container">
+      <div class="cta-section">
+        <h2>Watch on Devi's Lab</h2>
+        <p>
+          Every article has a matching video — step-by-step walkthroughs of Cloud, AI,
+          and GenAI applications on my YouTube channel.
+        </p>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+          <a href={`${base}/youtube/`} class="btn btn-white">Watch Videos</a>
+          <a
+            href="https://www.youtube.com/@devislab"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-white-outline"
+          >
+            Subscribe →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

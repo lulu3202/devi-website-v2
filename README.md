@@ -1,187 +1,149 @@
-## Curated Portfolio: Machine Learning, Generative AI, RAG & Agentic AI 
+# devi-website-v2 — Personal Brand Site built with Astro
 
-### 📄 Document Portal – LLMOps for Enterprise Document Intelligence
-This project showcases the design and deployment of a production-ready LLMOps system on AWS, enabling enterprises to analyze, compare, and query documents at scale. It features retrieval-augmented generation (RAG), multi-document chat, and compliance-focused document comparison, built with robust monitoring, CI/CD pipelines, and cost-optimized cloud-native architecture.
+My personal brand site rebuilt from scratch using [Astro](https://astro.build) — fast, clean, and deployed to GitHub Pages.
 
-<img src="images/doc2.png?raw=true" width="600" />
-
-
-### 🔧 Tech Stack
-![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white) ![LangChain](https://img.shields.io/badge/LangChain-1C3C3C?logo=chainlink&logoColor=white) ![FAISS](https://img.shields.io/badge/FAISS-0052CC?logo=databricks&logoColor=white) ![Google Gemini](https://img.shields.io/badge/Google%20Gemini-4285F4?logo=google&logoColor=white) ![AWS](https://img.shields.io/badge/AWS-FF9900?logo=amazonaws&logoColor=white) ![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white) ![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?logo=githubactions&logoColor=white) ![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
-
-[View code on GitHub](https://github.com/lulu3202/doocument_portal-) 
+> **Live site:** https://lulu3202.github.io/devi
 
 ---
 
-### 🧠 Second Brain AI Assistant using LLMs and Agentic RAG
+## What this is
 
-This project demonstrates the design, build and implementation of an end-to-end Gen AI system called second-brain-style AI assistant, from designing data-feature-training-inference pipelines to LLM fine-tuning to agentic RAG and real-time inference. 
+I replaced my old GitHub Pages Jekyll portfolio with a modern static site that reflects who I actually am: a content creator who builds with AI.
 
-<img src="images/second.jpeg?raw=true" width="300" />
-
-### 🔧 Tech Stack
-![ZenML](https://img.shields.io/badge/ZenML-F2921D?logo=zenml&logoColor=white) ![Comet](https://img.shields.io/badge/Comet-FF6F00?logo=comet&logoColor=white) ![Opik](https://img.shields.io/badge/Opik-4A90E2?logo=ai&logoColor=white) ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?logo=mongodb&logoColor=white) ![Hugging Face](https://img.shields.io/badge/Hugging%20Face-FFD21F?logo=huggingface&logoColor=black) ![Google Colab](https://img.shields.io/badge/Google%20Colab-F9AB00?logo=googlecolab&logoColor=white) ![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white) ![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
-
-
-[View code on GitHub](https://github.com/lulu3202/second_brain_ai_assistant_learning_journey) | [View my Blog](https://pub.towardsai.net/what-i-learned-from-the-second-brain-ai-assistant-open-source-genai-course-8d6038ab1457) 
+Built entirely with **Astro** (no heavy JS frameworks), styled with plain CSS, and deployed via **GitHub Actions**.
 
 ---
 
-### 🚀 Agentic AI App Hub using LangGraph, Pydantic, Streamlit & Groq  
+## Tech Stack
 
-This project demonstrates how to build an **Agentic AI app** using **LangGraph, Groq, Pydantic, and Streamlit**, implementing three powerful workflows for different use cases. Inspired by Anthropic’s research on **"Building Effective Agents"**, this project showcases how to design and deploy AI workflows efficiently.  
-
-<img src="images/agentic_ai.png?raw=true" width="300" />
-
-### 🛠️ Features & Workflows
-✅ **Learning Path Generator** (*Orchestrator-Synthesizer*) – Creates a **custom learning roadmap** based on your skills and goals.  
-✅ **Peer Code Reviewer** (*Parallelized Workflow*) – Reviews your code snippet for **security, readability, and best practices**.  
-✅ **Blog Generator** (*Evaluator-Optimizer*) – Generates a **high-quality blog** and evaluates it against predefined criteria.  
-
-### 🔧 Tech Stack
-![LangGraph](https://img.shields.io/badge/LangGraph-5E81AC?logo=langchain&logoColor=white) ![Groq](https://img.shields.io/badge/Groq-000000?logo=groq&logoColor=white) ![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?logo=streamlit&logoColor=white) ![Pydantic](https://img.shields.io/badge/Pydantic-009688?logo=pydantic&logoColor=white) ![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)  
-
-[View code on GitHub](https://github.com/lulu3202/langgraph_workflows) | [Live app hosted on HF Spaces](https://github.com/user-attachments/assets/014a5429-0955-41ce-81b8-e139121a0131) | [View my Blog](https://medium.com/towards-artificial-intelligence/building-agentic-ai-apps-using-langgraph-pydantic-streamlit-groq-f3c535cc553d) | [Watch my YouTube tutorial](https://youtu.be/m8fIDfA9EQA)
-
----
-### 🚀 Python Code Explainer App using Agno's Agentic Framework
-
-This project demonstrates a multi-agent system built using AGNO (previously called PhiData) library, integrating web search, GitHub code search, and GIF retrieval. The system features a Streamlit web app and a local AGNO playground for testing agent behaviors. 
-
-<img src="images/streamlit.png?raw=true" width="300" />
-
-### 🔧 Tech Stack
-![AGNO](https://img.shields.io/badge/AGNO-5E81AC?logo=ai&logoColor=white) ![DuckDuckGo API](https://img.shields.io/badge/DuckDuckGo-FF6600?logo=duckduckgo&logoColor=white) ![GitHub API](https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white) ![Giphy API](https://img.shields.io/badge/Giphy-00FF99?logo=giphy&logoColor=white) ![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?logo=streamlit&logoColor=white) ![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
-
-[View code on GitHub](https://github.com/lulu3202/agno_usecase) | [View my Blog](https://medium.com/@devipriyakaruppiah/agentic-framework-deep-dive-series-part-2-agno-c45da579b7c0) | [Watch my YouTube tutorial](https://www.youtube.com/watch?v=UAlX8debJOA)
-
----
-### Agentic Web Scraping using AWS Bedrock 
-
-This project showcases how to set up and deploy an AWS Bedrock Agent capable of web scraping URLs provided by users. It utilizes AWS Lambda for backend processing, Anthropic Claude 3.5 Sonnet as the underlying model, and Streamlit for the user interface. The workflow covers agent configuration, schema creation, and real-time testing, resulting in a user-friendly web scraping application.
-
-<img src="images/webscrape.png?raw=true" width="300" />
-
-![AWS Lambda](https://img.shields.io/badge/AWS%20Lambda-FF9900?logo=awslambda&logoColor=white) ![Amazon Bedrock](https://img.shields.io/badge/Amazon%20Bedrock-FF9900?logo=amazonaws&logoColor=white) ![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?logo=streamlit&logoColor=white) ![AWS EC2](https://img.shields.io/badge/AWS%20EC2-FF9900?logo=amazonec2&logoColor=white) ![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
-
-[View code on GitHub](https://github.com/lulu3202/bedrock_web_crawler_agent) |  [Watch my YouTube tutorial](https://www.youtube.com/watch?v=tKEu-K2YTTc) |  [View my Blog](https://community.aws/content/2p9uo3VJaGln3USg4oIB4SdPuTd/learn-web-scraping-with-aws-bedrock-agents) 
+| Tool | Purpose |
+|---|---|
+| [Astro v4](https://astro.build) | Static site generator |
+| Plain CSS + CSS Variables | Styling (no Tailwind) |
+| TypeScript | Content data files |
+| GitHub Actions | CI/CD deployment |
+| GitHub Pages | Hosting |
 
 ---
 
-### NASA NEO Dataset: Predicting Hazardous Near-Earth Objects with Machine Learning
+## Pages
 
-This  project utilizes the NASA NEO dataset to predict whether near-Earth objects are hazardous. With 338,199 observations and 9 features, I applied supervised learning techniques, preprocessing the data to optimize inputs. Random Forest emerged as the best-performing algorithm, achieving an accuracy of 91% in classifying hazardous objects.
-
-<img src="images/nasa_neo.png?raw=true" width="300" />
-
-
-![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white) ![Jupyter](https://img.shields.io/badge/Jupyter-F37626?logo=jupyter&logoColor=white) ![NumPy](https://img.shields.io/badge/NumPy-013243?logo=numpy) ![Matplotlib](https://img.shields.io/badge/Matplotlib-ffffff?logo=matplotlib) ![Pandas](https://img.shields.io/badge/Pandas-150458?logo=pandas)
-
-[View code on GitHub](https://github.com/lulu3202/ML-DS-Capstone-Project/tree/main)
-
----
-
-### Airflow ETL Pipeline with Postgres and NASA API Integration
-
-This project creates an ETL pipeline using Apache Airflow to extract data from NASA's Astronomy Picture of the Day (APOD) API. The extracted data is transformed and loaded into a PostgreSQL database for further analysis. Airflow orchestrates the workflow, managing task dependencies and scheduling. Docker is used to run Airflow and Postgres in isolated containers. The pipeline automates the daily extraction, transformation, and loading of astronomy-related data.
-
-<img src="images/nasa.jpg?raw=true" width="300" />
-
-![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white) ![Apache Airflow](https://img.shields.io/badge/Airflow-017CEE?logo=apache-airflow&logoColor=white) ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?logo=postgresql&logoColor=white) ![Astronomer](https://img.shields.io/badge/Astronomer-00A3E0?logo=astronomer&logoColor=white)
-
-[View code on GitHub](https://github.com/lulu3202/etl)
+| Route | Description |
+|---|---|
+| `/` | Home — hero, featured projects, latest writing, YouTube CTA |
+| `/writing/` | Article cards linking to Medium & Towards AI |
+| `/youtube/` | Embedded YouTube videos from Devi's Lab |
+| `/projects/` | 5 curated AI projects with tech stack badges |
+| `/about/` | Bio, career timeline, certifications, contact |
 
 ---
 
-### Photo Critique App
+## Project Structure
 
-This project develops a Photo Critique App using Streamlit and Google's Gemini-1.5-Flash-8B model. It involves setting up a virtual environment, securely storing API keys, and configuring the app to interact with the Gemini model for generating critiques based on uploaded images. The Streamlit interface allows users to run and test different versions of the app seamlessly.
-
-<img src="images/critique_app.jpg?raw=true" width="300" />
-
-![Google Generative AI](https://img.shields.io/badge/Google%20Generative%20AI-4285F4?logo=google&logoColor=white) ![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?logo=streamlit&logoColor=white) ![VS Code](https://img.shields.io/badge/VS%20Code-007ACC?logo=visual-studio-code&logoColor=white)
-
-[View code on GitHub](https://github.com/lulu3202/photo_critique_app1)  |  [Watch my YouTube tutorial](https://www.youtube.com/watch?si=h0Bqhnu2vOidbIZY&v=tUB6nulmk3s&feature=youtu.be) |  [View Blog on Medium](https://pub.towardsai.net/a-primer-on-using-googles-gemini-api-to-improve-your-photography-7862dc8dbaec)
-
----
-### Cloud Connections Game: A Fun and Interactive Word Grouping Puzzle 
-
-This project demonstrates how I designed and implemented a Cloud Connections Game as part of AWS Game Builder Challenge Hackathon 2024. I was inspired by NYT connections game. It features a backend that manages the game logic, dynamic word selection, and validation. Built with Python, the game supports scalable data integration through S3 for loading word categories dynamically. The workflow includes category creation, word randomization, and player interaction, resulting in fun gaming experience, powered by Streamlit.
-
-<img src="images/cloud_connection.png?raw=true" /> 
-
-![AWS](https://img.shields.io/badge/AWS-232F3E?logo=amazonaws&logoColor=white) ![Q Developer](https://img.shields.io/badge/Q_Developer-6E7DFF?logo=Q&logoColor=white) ![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white) ![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?logo=streamlit&logoColor=white)
-
-[View code on GitHub](https://github.com/lulu3202/aws_connections_game) |   [View Blog on DevPost](https://devpost.com/software/cloud-connections?ref_content=user-portfolio&ref_feature=in_progress)
-
----
-
-### Fuji X-S20 Camera Q&A Application
-
-This application provides an interactive Q&A platform for users to ask questions about the Fuji X-S20 camera, leveraging the power of Gemini Flash API and Retrieval Augmented Generation (RAG) to deliver real-time, concise and accurate answers.
-
-<img src="images/pdf_r.png?raw=true" />
-
-![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white) ![Gradio](https://img.shields.io/badge/Gradio-00B4D8?logo=gradio&logoColor=white) ![LangChain](https://img.shields.io/badge/LangChain-00A3E0?logo=python&logoColor=white) ![Google Generative AI](https://img.shields.io/badge/Google%20Generative%20AI-4285F4?logo=google&logoColor=white) ![Conda](https://img.shields.io/badge/Conda-40A9E0?logo=anaconda&logoColor=white)
-
-[View code on GitHub](https://github.com/lulu3202/PDF_RAG_Reader)  |  [View Blog on Medium](https://pub.towardsai.net/building-a-fuji-x-s20-camera-q-a-app-with-gemini-langchain-and-gradio-6f669d115636)
-
----
-
-### End To End Data Science Project Deployment with Flask, Docker and AWS EC2
-
-This project is an end-to-end machine learning application that predicts student performance based on various input features. It utilizes Flask for the web interface and Scikit-Learn for model development, along with a complete CI/CD workflow using GitHub Actions, Docker, and AWS ECR. The application encompasses data ingestion, transformation, and a prediction pipeline, resulting in an effective model for forecasting student grades.
-
-<img src="images/e2e.png?raw=true" width="300" />
-
-![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white) ![Flask](https://img.shields.io/badge/Flask-000000?logo=flask&logoColor=white) ![Scikit Learn](https://img.shields.io/badge/Scikit%20Learn-F7931E?logo=scikit-learn&logoColor=white) ![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white) ![AWS](https://img.shields.io/badge/Amazon%20Web%20Services-232F3E?logo=amazonaws&logoColor=white) ![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-2088FF?logo=githubactions&logoColor=white)
-
-[View code on GitHub](https://github.com/lulu3202/e2emlproject)
+```
+src/
+├── components/       # Reusable UI components
+│   ├── Nav.astro
+│   ├── Footer.astro
+│   ├── Hero.astro
+│   ├── ArticleCard.astro
+│   ├── ProjectCard.astro
+│   ├── TechBadge.astro
+│   ├── YouTubeEmbed.astro
+│   ├── TimelineItem.astro
+│   └── CertBadge.astro
+├── data/             # All site content as typed TypeScript arrays
+│   ├── articles.ts
+│   ├── projects.ts
+│   ├── videos.ts
+│   ├── timeline.ts
+│   └── certifications.ts
+├── layouts/
+│   └── BaseLayout.astro
+├── pages/
+│   ├── index.astro
+│   ├── writing.astro
+│   ├── youtube.astro
+│   ├── projects.astro
+│   └── about.astro
+└── styles/
+    └── global.css
+public/
+└── images/           # All site images
+```
 
 ---
 
-### Mobile Price Classification using AWS SageMaker
+## Running Locally
 
-This project leverages AWS SageMaker to classify mobile price ranges using a dataset with multiple features like battery power, RAM, and more. The data is split for training and testing, and a Random Forest model is trained to predict price categories. Finally, the model is deployed via an endpoint for real-time inference, showcasing end-to-end machine learning, all performed with AWS SageMaker.
+**Prerequisites:** Node.js 18+
 
-<img src="images/sagemaker.png?raw=true" width="300" />
+```bash
+# Clone the repo
+git clone https://github.com/lulu3202/devi-website-v2.git
+cd devi-website-v2
 
-![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white) ![Jupyter](https://img.shields.io/badge/Jupyter-F37626?logo=jupyter&logoColor=white) ![Pandas](https://img.shields.io/badge/Pandas-150458?logo=pandas&logoColor=white) ![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?logo=scikit-learn&logoColor=white) ![AWS SageMaker](https://img.shields.io/badge/AWS_SageMaker-FF9900?logo=amazon-aws&logoColor=white) ![Boto3](https://img.shields.io/badge/Boto3-569A31?logo=amazon-aws&logoColor=white)
+# Install dependencies
+npm install
 
-[View code on GitHub](https://github.com/lulu3202/awssagemaker1)
+# Start dev server
+npm run dev
+# → http://localhost:4321/devi
+
+# Build for production
+npm run build
+```
+
+---
+
+## Deploying to GitHub Pages
+
+This site deploys automatically via GitHub Actions on every push to `main`.
+
+**One-time setup:**
+1. Go to your repo → **Settings → Pages → Source → GitHub Actions**
+2. Push to `main` — the workflow handles the rest
+
+The workflow file is at [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml).
 
 ---
 
-### Animated Movie Poster Design App
+## Customising for Your Own Site
 
-This project utilizes AWS Lambda and the Stability AI Stable Diffusion model from AWS Bedrock to generate animated movie posters based on user-provided text prompts. The generated images are stored in an S3 bucket, and a pre-signed URL is returned for easy access. The implementation includes setting up an API Gateway for user interaction and testing with Postman for seamless functionality.
+All content lives in [`src/data/`](src/data/) as simple TypeScript arrays — no CMS needed.
 
-<img src="images/unicorn.png?raw=true" width="300" />
-Generated image for the prompt "Unicorn in the style of Dr.Seuss"
+| File | What to update |
+|---|---|
+| `src/data/articles.ts` | Your blog post titles, URLs, descriptions |
+| `src/data/projects.ts` | Your project names, images, GitHub links |
+| `src/data/videos.ts` | Your YouTube video IDs |
+| `src/data/timeline.ts` | Your career history |
+| `src/data/certifications.ts` | Your certifications + credential URLs |
 
-![Boto3](https://img.shields.io/badge/Boto3-FF9900?logo=amazonaws&logoColor=white) ![AWS](https://img.shields.io/badge/Amazon%20Web%20Services-232F3E?logo=amazonaws&logoColor=white) ![Amazon Bedrock](https://img.shields.io/badge/Amazon%20Bedrock-FF9900?logo=amazonaws&logoColor=white)
+Update `astro.config.mjs` with your own `site` and `base` values:
 
-[View code on GitHub](https://github.com/lulu3202/Image_Generation_with_Bedrock/blob/main/README.md)
+```js
+export default defineConfig({
+  site: 'https://yourusername.github.io',
+  base: '/your-repo-name',
+});
+```
 
 ---
-### Wine Quality Prediction: Using ElasticNet Regression with MLflow, AWS, and S3
 
-This project utilizes the Wine Quality dataset to predict quality by leveraging ElasticNet regression model, with performance evaluated using RMSE, MAE, and R² metrics. Experiment tracking and model artifacts are managed with MLflow on a remote AWS server, with S3 used for secure and scalable storage.
+## Design System
 
-<img src="images/wine.png?raw=true" width="300" />
+- **Accent color:** `#FF6B6B` (coral)
+- **Background:** `#FAFAFA` (warm off-white)
+- **Font:** Inter (Google Fonts)
+- **Approach:** CSS custom properties — no utility framework
 
-![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white) ![Pandas](https://img.shields.io/badge/Pandas-150458?logo=pandas&logoColor=white) ![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?logo=scikit-learn&logoColor=white) ![MLflow](https://img.shields.io/badge/MLflow-4B8BBE?logo=mlflow&logoColor=white) ![AWS S3](https://img.shields.io/badge/AWS_S3-569A31?logo=amazon-aws&logoColor=white) ![Boto3](https://img.shields.io/badge/Boto3-569A31?logo=amazon-aws&logoColor=white)
+---
 
-[View code on GitHub](https://github.com/lulu3202/mlflow_aws)
+## About Me
 
-## Cloud Certifications 
-My active cloud certifications include:
+I'm Devi Priya — Senior AI Product Manager and content creator. I write beginner-friendly AI tutorials on [Medium](https://medium.com/@devipriyakaruppiah) and create step-by-step videos on [YouTube (@devislab)](https://www.youtube.com/@devislab).
 
-- [Databricks Certified Generative AI Engineer Associate](https://credentials.databricks.com/0215e507-0732-4089-9ea0-9c62423920b5#acc.OAZbYBDo)
-- [AWS Certified Machine Learning Speciality](https://www.credly.com/badges/786c057e-26de-473c-a711-79e309ccc86c/linked_in?t=sop5vy)
-- [Microsoft Certified: Azure AI Engineer Associate](https://learn.microsoft.com/en-us/users/devi-6391/credentials/bd28630d2b036a1a?ref=https%3A%2F%2Fwww.linkedin.com%2F)
-- [Microsoft Certified: Azure Solutions Architect Expert](https://learn.microsoft.com/en-us/users/devi-6391/credentials/7aacac48819cc637?ref=https%3A%2F%2Fwww.linkedin.com%2F)
-- [Microsoft Certified: Azure Administrator Associate](https://learn.microsoft.com/en-us/users/devi-6391/credentials/6e72329de036849d?ref=https%3A%2F%2Fwww.linkedin.com%2F)
-- [AWS Certified Solutions Architect – Associate](https://www.credly.com/badges/fe5d9495-2ca7-4f0e-b376-3379ed63b025/linked_in_profile)
-- [Google Certified Cloud Digital Leader](https://www.credential.net/48420cc4-5689-4376-a7e0-a21429b939df#gs.0me98g)
-- [Salesforce Certified Agentforce Specialist](https://drive.google.com/file/d/10MmojiWetR9W_VmrN3QGrUPfydJW4cSP/view)
+---
+
+*Built with [Astro](https://astro.build) · Deployed on [GitHub Pages](https://pages.github.com)*

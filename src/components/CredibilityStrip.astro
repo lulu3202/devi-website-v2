@@ -1,0 +1,25 @@
+---
+const items = [
+  { label: 'Towards AI', href: 'https://medium.com/towards-artificial-intelligence', note: '500K+ followers' },
+  { label: 'Medium Writer', href: 'https://medium.com/@devipriyakaruppiah' },
+  { label: 'AWS Community Builder', href: 'https://aws.amazon.com/developer/community/community-builders/' },
+  { label: 'Ex-Microsoft', href: null },
+  { label: 'Ex-Deloitte', href: null },
+  { label: '10+ Certifications', href: null },
+];
+---
+
+<div class="credibility-strip">
+  <div class="container credibility-inner">
+    <span class="credibility-label">As seen on / associated with</span>
+    {items.map((item) =>
+      item.href ? (
+        <a href={item.href} class="credibility-item link" target="_blank" rel="noopener noreferrer">
+          {item.label}{item.note ? ` (${item.note})` : ''}
+        </a>
+      ) : (
+        <span class="credibility-item">{item.label}</span>
+      )
+    )}
+  </div>
+</div>

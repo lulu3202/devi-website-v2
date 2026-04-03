@@ -1,0 +1,40 @@
+---
+interface Props {
+  name: string;
+}
+
+const { name } = Astro.props;
+
+// Color map for common technologies
+const colorMap: Record<string, { bg: string; color: string }> = {
+  'Python':      { bg: '#EFF6FF', color: '#1D4ED8' },
+  'FastAPI':     { bg: '#ECFDF5', color: '#059669' },
+  'LangChain':   { bg: '#F5F3FF', color: '#7C3AED' },
+  'LangGraph':   { bg: '#F5F3FF', color: '#6D28D9' },
+  'FAISS':       { bg: '#FFF7ED', color: '#C2410C' },
+  'AWS':         { bg: '#FFF7ED', color: '#EA580C' },
+  'AWS Lambda':  { bg: '#FFF7ED', color: '#EA580C' },
+  'Amazon Bedrock': { bg: '#FFF7ED', color: '#C2410C' },
+  'Docker':      { bg: '#EFF6FF', color: '#1E40AF' },
+  'Streamlit':   { bg: '#FFF0F0', color: '#DC2626' },
+  'Groq':        { bg: '#F0FDF4', color: '#16A34A' },
+  'Pydantic':    { bg: '#ECFDF5', color: '#047857' },
+  'MongoDB':     { bg: '#F0FDF4', color: '#15803D' },
+  'ZenML':       { bg: '#F5F3FF', color: '#7C3AED' },
+  'Hugging Face':{ bg: '#FFFBEB', color: '#B45309' },
+  'AGNO':        { bg: '#FEF2F2', color: '#991B1B' },
+  'GitHub API':  { bg: '#F3F4F6', color: '#374151' },
+  'DuckDuckGo':  { bg: '#FFF7ED', color: '#C2410C' },
+  'Claude 3.5':  { bg: '#FEF2F2', color: '#9F1239' },
+  'Agentic RAG': { bg: '#FDF4FF', color: '#86198F' },
+};
+
+const style = colorMap[name] ?? { bg: '#F3F4F6', color: '#4B5563' };
+---
+
+<span
+  class="tech-badge"
+  style={`background-color: ${style.bg}; color: ${style.color};`}
+>
+  {name}
+</span>

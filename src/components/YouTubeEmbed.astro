@@ -1,0 +1,43 @@
+---
+interface Props {
+  videoId: string;
+  title: string;
+  description?: string;
+}
+
+const { videoId, title, description } = Astro.props;
+const isPlaceholder = videoId.startsWith('PLACEHOLDER');
+const channelUrl = 'https://www.youtube.com/@devislab';
+---
+
+<div class="video-card">
+  <div class="video-wrapper">
+    {isPlaceholder ? (
+      <!-- Placeholder shown until real video IDs are added -->
+      <div class="video-placeholder">
+        <div class="video-placeholder-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </div>
+        <strong style="font-size: 0.95rem;">{title}</strong>
+        <p>Video coming soon</p>
+        <a href={channelUrl} target="_blank" rel="noopener noreferrer" class="btn btn-white btn-sm" style="font-size:0.8rem;">
+          Watch on YouTube →
+        </a>
+      </div>
+    ) : (
+      <iframe
+        src={`https://www.youtube.com/embed/${videoId}`}
+        title={title}
+        loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      />
+    )}
+  </div>
+  <div class="video-card-info">
+    <p class="video-card-title">{title}</p>
+    {description && <p class="video-card-meta">{description}</p>}
+  </div>
+</div>

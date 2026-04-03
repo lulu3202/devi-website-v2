@@ -1,0 +1,30 @@
+---
+interface Props {
+  name: string;
+  issuer: string;
+  url: string;
+}
+
+const { name, issuer, url } = Astro.props;
+const isPlaceholder = url === '#';
+---
+
+<div class="cert-badge">
+  <p class="cert-issuer">{issuer}</p>
+  <p class="cert-name">{name}</p>
+  {isPlaceholder ? (
+    <span class="cert-link" style="cursor: default; opacity: 0.5;">
+      Credential →
+    </span>
+  ) : (
+    <a
+      href={url}
+      class="cert-link"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`View ${name} credential from ${issuer}`}
+    >
+      View Credential →
+    </a>
+  )}
+</div>

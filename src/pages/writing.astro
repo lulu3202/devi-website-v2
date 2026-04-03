@@ -1,0 +1,53 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import ArticleCard from '@components/ArticleCard.astro';
+import { articles } from '@data/articles';
+---
+
+<BaseLayout
+  title="Writing | Devi Priya K"
+  description="Beginner-friendly tutorials on AI tools, cloud services, and GenAI applications. Published on Towards AI and Medium."
+>
+  <div class="page-header">
+    <div class="container">
+      <h1>Writing</h1>
+      <p>
+        Tutorials and deep-dives on AI, cloud, and GenAI — published on
+        <a href="https://medium.com/@devipriyakaruppiah" target="_blank" rel="noopener noreferrer" style="color: var(--color-coral); font-weight: 600;">Medium</a>.
+      </p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid-2">
+        {articles.map((article) => (
+          <ArticleCard
+            title={article.title}
+            publication={article.publication}
+            url={article.url}
+            description={article.description}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section-sm">
+    <div class="container">
+      <div class="cta-section">
+        <h2>Follow for More</h2>
+        <p>I publish new tutorials regularly. Follow me on Medium to get notified.</p>
+        <a
+          href="https://medium.com/@devipriyakaruppiah"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-white"
+        >
+          Follow on Medium →
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

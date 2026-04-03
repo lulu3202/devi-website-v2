@@ -1,0 +1,53 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import ProjectCard from '@components/ProjectCard.astro';
+import { projects } from '@data/projects';
+---
+
+<BaseLayout
+  title="Projects | Devi Priya K"
+  description="Curated AI and cloud projects — from enterprise document intelligence to agentic web scraping. Each project links to the code, blog post, and video walkthrough."
+>
+  <div class="page-header">
+    <div class="container">
+      <h1>Projects</h1>
+      <p>Applied AI work — built to learn, documented to share.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div style="display: flex; flex-direction: column; gap: 2rem;">
+        {projects.map((project) => (
+          <ProjectCard
+            title={project.title}
+            description={project.description}
+            image={project.image}
+            tags={project.tags}
+            githubUrl={project.githubUrl}
+            blogUrl={project.blogUrl}
+            youtubeUrl={project.youtubeUrl}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- GitHub CTA -->
+  <section class="section-sm">
+    <div class="container">
+      <div class="cta-section">
+        <h2>See Everything on GitHub</h2>
+        <p>All my code is open — explore, fork, and build on it.</p>
+        <a
+          href="https://github.com/lulu3202"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-white"
+        >
+          github.com/lulu3202 →
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,114 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import TimelineItem from '@components/TimelineItem.astro';
+import CertBadge from '@components/CertBadge.astro';
+import { timeline } from '@data/timeline';
+import { certifications } from '@data/certifications';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<BaseLayout
+  title="About | Devi Priya K"
+  description="Senior AI Product Manager and content creator. My story — from technical writing in Chennai to AI product management in India, with Microsoft and Deloitte in between."
+>
+  <div class="page-header">
+    <div class="container">
+      <h1>About Me</h1>
+      <p>My superpower is making complex things simple.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+
+      <!-- Bio -->
+      <div class="about-intro">
+        <div>
+          <!-- TODO: Replace with your preferred photo — currently: about_photo.jpeg -->
+          <img
+            src={`${base}/images/about_photo.jpg`}
+            alt="Devi Priya K"
+            class="about-photo"
+            width="280"
+            height="340"
+            loading="lazy"
+          />
+        </div>
+        <div class="about-bio">
+          <h2>A little about me.</h2>
+          <p>
+            After earning my Master's in Information Technology Management from UT Dallas,
+            I built global experience across product management, security, and technology consulting.
+            Over the years, I've worked across companies in the US — Microsoft, Deloitte, and Dynata —
+            building products, leading programs, and learning how to align teams to ship effectively.
+          </p>
+          <p>
+            Today, I'm a Senior AI Product Manager building AI-powered products for an Indian startup,
+            <a href="https://www.ngenux.com" target="_blank" rel="noopener noreferrer" style="color: var(--color-coral); font-weight: 600;">Ngenux Solutions</a>,
+            while also creating content to make AI simple and practical.
+          </p>
+          <p>
+            I write beginner-friendly AI tutorials on <a href="https://medium.com/@devipriyakaruppiah" target="_blank" rel="noopener noreferrer" style="color: var(--color-coral); font-weight: 600;">Medium</a> and run a YouTube channel called
+            <a href="https://www.youtube.com/@devislab" target="_blank" rel="noopener noreferrer" style="color: var(--color-coral); font-weight: 600;">Devi's Lab</a>
+            with step-by-step video walkthroughs.
+          </p>
+        </div>
+      </div>
+
+
+      <!-- Career Timeline -->
+      <div style="max-width: 640px; margin: 0 auto;">
+        <h2 style="margin-bottom: 2.5rem; text-align: center;">Career Journey</h2>
+        <div class="timeline">
+          {timeline.map((entry) => (
+            <TimelineItem
+              role={entry.role}
+              company={entry.company}
+              location={entry.location}
+              note={entry.note}
+              isCurrent={entry.isCurrent}
+              isTransition={entry.isTransition}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certifications -->
+  <section class="section" style="background: var(--color-surface-alt);">
+    <div class="container">
+      <div class="section-header">
+        <h2>Certifications</h2>
+        <p>10+ cloud and AI certifications across AWS, Azure, GCP, Databricks, and Salesforce.</p>
+      </div>
+      <div class="grid-3">
+        {certifications.map((cert) => (
+          <CertBadge name={cert.name} issuer={cert.issuer} url={cert.url} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section">
+    <div class="container" style="max-width: 640px; text-align: center;">
+      <h2 style="margin-bottom: 1rem;">Let's Connect</h2>
+      <p style="margin-bottom: 2rem; font-size: 1.05rem;">
+        Whether you want to collaborate, have a question about a tutorial,
+        or just want to say hi — I'd love to hear from you.
+      </p>
+      <div class="contact-grid" style="justify-content: center;">
+        <a href="mailto:devi.sastra@gmail.com" class="btn btn-primary">
+          Email Me
+        </a>
+        <a
+          href="https://www.linkedin.com/in/devipriyak/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-outline"
+        >
+          Connect on LinkedIn
+        </a>
+      </div>

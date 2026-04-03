@@ -1,0 +1,62 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import YouTubeEmbed from '@components/YouTubeEmbed.astro';
+import { videos, channelUrl } from '@data/videos';
+---
+
+<BaseLayout
+  title="YouTube | Devi Priya K — Devi's Lab"
+  description="Step-by-step video tutorials on Cloud, AI, and GenAI applications. Subscribe to Devi's Lab on YouTube."
+>
+  <div class="page-header">
+    <div class="container">
+      <h1>Devi's Lab</h1>
+      <p>
+        Step-by-step tutorials on Cloud, AI, and GenAI applications —
+        every article has a matching video.
+      </p>
+      <div style="margin-top: 1.5rem;">
+        <a
+          href={channelUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-primary"
+        >
+          Subscribe to Devi's Lab →
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid-2">
+        {videos.map((video) => (
+          <YouTubeEmbed
+            videoId={video.videoId}
+            title={video.title}
+            description={video.description}
+          />
+        ))}
+      </div>
+
+      <div style="margin-top: 3rem;">
+        <div class="cta-section">
+          <h2>More Videos on the Channel</h2>
+          <p>
+            New tutorials every week on AI tools, agentic frameworks, cloud certifications,
+            and hands-on GenAI projects.
+          </p>
+          <a
+            href={channelUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-white"
+          >
+            Visit YouTube Channel →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
