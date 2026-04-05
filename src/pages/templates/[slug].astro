@@ -102,15 +102,10 @@ const otherTemplates = templates.filter((t) => t.slug !== template.slug);
 
       <!-- Newsletter CTA -->
       <div class="template-newsletter">
-        <h2>Get a free template every week →</h2>
-        <p>Every video I publish comes with a free template. Join the newsletter to get them delivered.</p>
-        {template.beehiivUrl ? (
-          <a href={template.beehiivUrl} class="btn btn-primary" target="_blank" rel="noopener noreferrer">
-            Subscribe Free →
-          </a>
-        ) : (
-          <p class="newsletter-placeholder"><em>Newsletter signup coming soon.</em></p>
-        )}
+        <h2>Get a free template with every video →</h2>
+        <p>Every video I publish comes with a free template. Join the newsletter to get it delivered.</p>
+        <script async src="https://subscribe-forms.beehiiv.com/embed.js"></script>
+        <iframe src="https://subscribe-forms.beehiiv.com/f2aa3d0d-ccfc-40ed-a524-e1068c747cdb" class="beehiiv-embed" data-test-id="beehiiv-embed" frameborder="0" scrolling="no" style="width: 560px; height: 315px; margin: 0; border-radius: 0px !important; background-color: transparent; box-shadow: 0 0 #0000; max-width: 100%;"></iframe>
       </div>
 
     </div>
