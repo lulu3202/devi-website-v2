@@ -1334,6 +1334,7 @@ p {
     flex-direction: row;
     text-align: left;
     justify-content: space-between;
+    align-items: flex-start;
   }
 
   .hero-inner {
