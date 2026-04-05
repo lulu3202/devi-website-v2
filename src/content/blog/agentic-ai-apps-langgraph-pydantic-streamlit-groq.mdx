@@ -1,129 +1,323 @@
 ---
-title: "Building Agentic AI Apps using LangGraph, Pydantic, Streamlit & Groq"
-description: "Step-by-step walkthrough of building a multi-agent AI application with LangGraph, Groq's fast inference, Pydantic validation, and a clean Streamlit UI."
+title: "Building Agentic AI Apps using LangGraph, Pydantic, Streamlit & Groq (Part 1)"
+description: "A step-by-step guide to building agentic AI applications using LangGraph, Groq, Pydantic, and Streamlit with real-world workflows."
 date: "2025-03-19"
-tags: ["LangGraph", "Agentic AI", "Streamlit", "Groq", "Python"]
-canonicalUrl: "https://devislabai.com/blog/agentic-ai-apps-langgraph-pydantic-streamlit-groq/"
+tags: ["LangGraph", "Agentic AI", "LLMs", "Streamlit", "Groq"]
+image: "langgraph-cover.jpg"
+canonicalUrl: "https://devislabai.com/blog/langgraph-agentic-ai-apps/"
 ---
 
-*Part 1 of the Agentic Framework Deep Dive Series.*
+## Navigation
 
-I came across an Anthropic engineering article on building effective agents that laid out five core workflow patterns: prompt chaining, routing, parallelization, evaluator-optimizer, and orchestrator-worker. I decided to build all five into a single application using LangGraph, Groq, Pydantic, and Streamlit.
-
-The result: three use cases, three different workflow architectures, all in one app hosted on Hugging Face Spaces.
-
----
-
-## Agentic AI vs AI Agent — A Quick Primer
-
-These two terms get mixed up constantly:
-
-> **Agentic AI** — A subset of Generative AI. Unlike GenAI, its primary goal is to solve complex workflows rather than generate new content.
-
-> **AI Agent** — A specialized tool designed to perform specific tasks within an AI system.
-
-The core distinction: Agentic AI is the broader system that utilizes AI agents to achieve its objectives.
+- [Prelude](#prelude)
+- [Agentic AI vs AI Agent](#agentic-ai-vs-ai-agent)
+- [Why Start with LangGraph](#why-start-with-langgraph)
+- [An Iterative Approach](#an-iterative-approach)
+- [Use Cases](#use-cases)
+- [Development Process](#development-process)
+- [Debug Phase](#debug-phase)
+- [UI Phase](#ui-phase)
+- [Deployment](#deployment)
+- [Conclusion](#conclusion)
 
 ---
 
-## Why Start with LangGraph?
+## Prelude
 
-LangGraph is the foundation. Every other agentic framework gets easier once you establish strong foundations with LangGraph.
+In December, Anthropic published a widely shared article: *Building Effective Agents*.
 
-**Key concepts:**
+One key insight from that article was five core workflows:
 
-- **State** — Central data object managing information exchange between graph nodes
-- **Nodes** — Functions executing operations: LLM calls, result evaluation, data transformation
-- **Edges** — Connections establishing execution order and data movement
-- **Workflows** — Operational patterns: chaining, parallelization, routing, orchestrator-worker, evaluator-optimizer
+- Prompt chaining  
+- Routing  
+- Parallelization  
+- Evaluator-optimizer  
+- Orchestrator-worker  
 
----
+Inspired by this, I built an app using:
 
-## The Three Use Cases
-
-### 1. Learning Path Generator — Orchestrator-Synthesizer
-
-Dynamically generates personalized study roadmaps. The orchestrator determines what tasks are needed based on user input; workers independently generate topic summaries; the synthesizer integrates summaries into structured learning plans.
-
-Key distinction from parallelization: **sub-tasks are not predefined** — they're determined by the orchestrator based on input.
-
-### 2. Peer Code Review — Parallelized
-
-Executes multiple review processes simultaneously:
-- Readability assessment
-- Security vulnerability detection
-- Best practices verification
-
-Unlike orchestrator-synthesizer, **sub-tasks are predefined** and run in parallel rather than sequentially.
-
-### 3. Blog Generation — Evaluator-Optimizer
-
-Automates content generation through iterative quality control. Generated content is evaluated against predefined criteria; acceptable outputs are returned while others receive feedback and are regenerated.
+- LangGraph  
+- Groq  
+- Pydantic  
+- Streamlit  
 
 ---
 
-## Building with LangGraph: A Six-Step Dev Process
+### 📸 App Preview
 
-Here's the methodology I used for each use case:
+![LangGraph App](/images/langgraph-app.png)
 
-1. Understand the problem dynamics and data flow (input → processing → output)
-2. Define the state object tracking workflow progress
-3. Create node functions that modify state
-4. Establish conditional edge functions for decision points
-5. Construct the graph through node connections
-6. Test the compiled workflow
+👉 Try it here:  
+https://huggingface.co/spaces/Deepri24/LangGraph_Workflows  
 
 ---
 
-## Project Structure
+## What This Blog Covers
+
+- Understanding agentic workflows  
+- Building 3 real use cases  
+- Step-by-step development process  
+
+👉 Code: https://github.com/lulu3202/langgraph_workflows  
+
+---
+
+## Agentic AI vs AI Agent
+
+### Agentic AI
+
+- A system that solves workflows  
+- Uses multiple agents/tools  
+
+---
+
+### AI Agent
+
+- A specialized tool  
+- Performs a specific task  
+
+---
+
+👉 Key idea:
+
+Agentic AI = system  
+AI agents = components  
+
+---
+
+## Why Start with LangGraph
+
+LangGraph is the best starting point because:
+
+- it builds strong foundations  
+- other frameworks become easier later  
+
+---
+
+### Key Concepts
+
+- **State** → shared data  
+- **Nodes** → operations  
+- **Edges** → flow between nodes  
+- **Workflows** → execution patterns  
+
+---
+
+## An Iterative Approach
+
+I followed a structured process:
+
+1. Brainstorm use cases  
+2. Develop individual components  
+3. Debug workflows  
+4. Build UI  
+5. Push to GitHub  
+6. Deploy  
+
+---
+
+## Use Cases
+
+### 1. Blog Generation App
+
+Uses **Evaluator-Optimizer workflow**
+
+---
+
+### 📸 Workflow
+
+![Blog Workflow](/images/blog-workflow.png)
+
+---
+
+### Why this works
+
+- generates content  
+- evaluates quality  
+- improves iteratively  
+
+---
+
+## 2. Code Review App
+
+Uses **Parallelization workflow**
+
+---
+
+### 📸 Workflow
+
+![Code Review Workflow](/images/code-review.png)
+
+---
+
+### Why this works
+
+- multiple checks run simultaneously  
+- faster and more efficient  
+
+---
+
+## 3. Learning Path Generator
+
+Uses **Orchestrator-Synthesizer workflow**
+
+---
+
+### 📸 Workflow
+
+![Learning Path Workflow](/images/learning-path.png)
+
+---
+
+### Why this works
+
+- dynamically creates tasks  
+- adapts to user input  
+
+---
+
+### Key Difference
+
+Parallelization → predefined tasks  
+Orchestrator → dynamic tasks  
+
+---
+
+## Development Process
+
+### 1. Understand the Problem
+
+- define input  
+- define output  
+- map workflow  
+
+---
+
+### 2. Define State
+
+- central object  
+- tracks workflow progress  
+
+---
+
+### 3. Define Nodes
+
+- operations  
+- transformations  
+
+---
+
+### 4. Define Edges
+
+- conditional flows  
+- decision points  
+
+---
+
+### 5. Build Graph
+
+- connect nodes  
+- define execution  
+
+---
+
+### 6. Compile & Run
+
+- test workflows  
+- validate outputs  
+
+---
+
+## Debug Phase
+
+LangGraph provides:
+
+- LangSmith  
+- LangGraph Studio  
+
+---
+
+### Debug Tools
+
+- `@traceable` decorator  
+- execution tracking  
+- graph visualization  
+
+---
+
+## UI Phase
+
+Built using Streamlit.
+
+---
+
+### Features
+
+- simple UI  
+- real-time outputs  
+- easy integration  
+
+---
+
+### Run locally
 
 ```bash
-langgraph_workflows/
-├── blog_generation/
-│   └── blog_gen.py
-├── code_review/
-│   └── code_review.py
-├── learning_path/
-│   └── learning_path.py
-├── app.py               # Streamlit unified interface
-├── requirements.txt
-└── .env
+streamlit run app.py
 ```
 
 ---
 
-## Debugging Tools
+## Deployment
 
-**LangSmith** — Add `@traceable` decorators to functions you want tracked. Requires account creation at smith.langchain.com.
+### Streamlit Cloud
 
-**LangGraph Studio** — Requires a `langgraph.json` config file and CLI execution:
-
-```bash
-langgraph dev
-```
+- connect GitHub repo  
+- deploy instantly  
 
 ---
 
-## Deploying to Hugging Face Spaces
+### Hugging Face Spaces
 
-```bash
-# 1. Create a new Space on huggingface.co (generates unique URL)
-# 2. Update main.yml with your HF space URL
-# 3. Push to GitHub — auto-deploys via Actions
-```
-
-The app is live at: [Hugging Face Spaces](https://huggingface.co/spaces/Deepri24/LangGraph_Workflows) — bring your own Groq API key.
+- create space  
+- update config  
+- deploy  
 
 ---
 
-## Resources
+## 🎥 Companion Video
 
-- [GitHub Repo](https://github.com/lulu3202/langgraph_workflows)
-- [Groq API](https://groq.com)
-- Anthropic's "Building Effective Agents" article
+<iframe style="aspect-ratio:16/9;width:100%;" src="https://www.youtube.com/embed/m8fIDfA9EQA" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
+---
 
-> "You don't learn to walk by following rules. You learn by doing and by falling over." — Richard Branson
+## Conclusion
+
+This project helped me:
+
+- understand agentic workflows  
+- build real applications  
+- experiment with frameworks  
 
 ---
 
-*Originally published on [Towards AI](https://medium.com/towards-artificial-intelligence/building-agentic-ai-apps-using-langgraph-pydantic-streamlit-groq-f3c535cc553d).*
+### Why this matters
+
+Agentic AI is shifting from:
+
+👉 generating content  
+to  
+👉 solving workflows  
+
+---
+
+## Key Insight
+
+> Agentic AI is not about generating text  
+> it’s about orchestrating systems  
+
+---
+
+## 📩 Subscribe
+
+If you're building AI systems:
+
+I share practical workflows, tools, and experiments every time I publish.

@@ -1,0 +1,232 @@
+---
+title: "Building a Fuji X-S20 Q&A App with Gemini, LangChain and Gradio"
+description: "A beginner-friendly guide to building a RAG-based question answering app using Gemini, LangChain, and Gradio."
+date: "2024-11-03"
+tags: ["RAG", "LangChain", "Gemini", "Gradio", "AI Applications"]
+image: "fuji-rag-cover.jpg"
+canonicalUrl: "https://devislabai.com/blog/fuji-rag-app/"
+---
+
+## Navigation
+
+- [Intro](#intro)
+- [What You’ll Build](#what-youll-build)
+- [Understanding RAG](#understanding-rag)
+- [LangChain Overview](#langchain-overview)
+- [Step-by-Step Build](#step-by-step-build)
+- [Run the App](#run-the-app)
+- [Conclusion](#conclusion)
+
+---
+
+## Intro
+
+In this tutorial, we build a Fuji X-S20 Question Answering App using:
+
+- Gemini API  
+- LangChain  
+- Gradio  
+
+The goal is simple:
+
+👉 Ask questions about your camera without reading a 400-page manual  
+
+---
+
+## What You’ll Build
+
+A RAG-powered app that:
+
+- reads a PDF manual  
+- retrieves relevant context  
+- answers user questions  
+
+---
+
+## Understanding RAG
+
+RAG (Retrieval Augmented Generation) works in 4 steps:
+
+1. Load data  
+2. Split into chunks  
+3. Create embeddings  
+4. Store in vector database  
+
+---
+
+### 📸 RAG Flow
+
+![RAG Diagram](/images/rag-diagram.png)
+
+---
+
+## LangChain Overview
+
+LangChain helps:
+
+- manage embeddings  
+- connect to vector databases  
+- build retrieval pipelines  
+
+---
+
+### 📸 LangChain Flow
+
+![LangChain Diagram](/images/langchain-flow.png)
+
+---
+
+## Step-by-Step Build
+
+### Step 1: Environment Setup
+
+```python
+import os
+import gradio as gr
+from dotenv import load_dotenv
+from langchain_community.document_loaders import PyPDFLoader
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_chroma import Chroma
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
+from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain.chains import create_retrieval_chain
+from langchain.chains.combine_documents import create_stuff_documents_chain
+from langchain_core.prompts import ChatPromptTemplate
+```
+
+---
+
+### Step 2: Load Environment Variables
+
+```python
+load_dotenv()
+api_key = os.getenv("API_KEY")
+```
+
+---
+
+### Step 3: Load PDF Manual
+
+```python
+loader = PyPDFLoader("Fuji_xs20_manual.pdf")
+data = loader.load()
+```
+
+---
+
+### Step 4: Split Text
+
+```python
+text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000)
+docs = text_splitter.split_documents(data)
+```
+
+---
+
+### Step 5: Create Embeddings
+
+```python
+embeddings = GoogleGenerativeAIEmbeddings(api_key=api_key, model="models/embedding-001")
+vectorstore = Chroma.from_documents(documents=docs, embedding=embeddings)
+retriever = vectorstore.as_retriever(search_type="similarity", search_kwargs={"k": 10})
+```
+
+---
+
+### Step 6: Configure LLM
+
+```python
+llm = ChatGoogleGenerativeAI(model="gemini-1.5-pro", temperature=0.3, max_tokens=500)
+```
+
+---
+
+### Step 7: Prompt Template
+
+```python
+system_prompt = (
+    "You are an assistant for question-answering tasks. "
+    "Use retrieved context to answer. If unknown, say you don't know. "
+    "Keep answers concise."
+)
+
+prompt = ChatPromptTemplate.from_messages([
+    ("system", system_prompt),
+    ("human", "{input}")
+])
+```
+
+---
+
+### Step 8: Create RAG Chain
+
+```python
+qa_chain = create_stuff_documents_chain(llm, prompt)
+rag_chain = create_retrieval_chain(retriever, qa_chain)
+```
+
+---
+
+### Step 9: Query Function
+
+```python
+def answer_query(query):
+    if query:
+        response = rag_chain.invoke({"input": query})
+        return response["answer"]
+```
+
+---
+
+### Step 10: Gradio Interface
+
+```python
+iface = gr.Interface(
+    fn=answer_query,
+    inputs="text",
+    outputs="text",
+    title="Fuji X-S20 Q&A App",
+    description="Ask any question about your Fuji camera"
+)
+
+if __name__ == "__main__":
+    iface.launch()
+```
+
+---
+
+## Run the App
+
+```bash
+python app.py
+```
+
+---
+
+### 📸 App Interface
+
+![Gradio UI](/images/gradio-ui.png)
+
+---
+
+## Conclusion
+
+You now have a working RAG application that:
+
+- understands documents  
+- retrieves context  
+- answers questions  
+
+---
+
+## Key Insight
+
+> RAG allows AI systems to answer questions using your own data  
+
+---
+
+## 📩 Subscribe
+
+If you're building AI systems:
+
+I share practical workflows, tools, and experiments every time I publish.

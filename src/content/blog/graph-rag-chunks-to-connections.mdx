@@ -1,163 +1,250 @@
 ---
 title: "From Chunks to Connections: The Case for Graph RAG"
-description: "Do we really need Graph RAG? If yes, why and when? A clear explanation of what changes — complete with a Bridgerton demo."
-date: "2026-02-08"
-tags: ["RAG", "Graph RAG", "LLM", "Knowledge Graphs", "AI Architecture"]
-canonicalUrl: "https://devislabai.com/blog/graph-rag-chunks-to-connections/"
+description: "Do we really need Graph RAG? When it matters, why it works, and a hands-on Bridgerton demo."
+date: "2026-02-09"
+tags: ["RAG", "Graph RAG", "LLMs", "AI Systems"]
+image: "graph-rag-cover.jpg"
+canonicalUrl: "https://devislabai.com/blog/graph-rag-case/"
 ---
 
-Classic RAG works well for simple lookups. But there's a class of questions it consistently fails on — and Graph RAG exists specifically to solve them.
+## Navigation
 
-> "You can optimize every step in this pipeline and still fail on questions that require explicit relationships."
-
-This post answers: do we really need Graph RAG, and if so, when?
+- [Intro](#intro)
+- [Understanding Traditional RAG’s Limitations](#understanding-traditional-rags-limitations)
+- [Knowledge is Not Flat. It is a Graph.](#knowledge-is-not-flat-it-is-a-graph)
+- [What Actually Changes with Graph RAG](#what-actually-changes-with-graph-rag)
+- [Why This Matters for Enterprise Use Cases](#why-this-matters-for-enterprise-use-cases)
+- [When to Use Graph RAG (and When Not To)](#when-to-use-graph-rag-and-when-not-to)
+- [The Tradeoffs](#the-tradeoffs)
+- [The Plot Thickens: Bridgerton Demo](#the-plot-thickens-bridgerton-demo)
+- [Try It Yourself](#try-it-yourself)
+- [What’s Next for Graph RAG](#whats-next-for-graph-rag)
+- [Outro](#outro)
 
 ---
 
-## Understanding Traditional RAG's Limitations
+## TL;DR
 
-Classic Retrieval-Augmented Generation (RAG) follows four steps:
-1. Fragment documents into chunks
-2. Embed those chunks
-3. Retrieve the K most similar chunks at query time
-4. Prompt the LLM to answer using retrieved chunks
+- Traditional RAG retrieves **text similarity**
+- Graph RAG retrieves **relationships**
+- Use Graph RAG when reasoning depends on connections, not just content
 
-The problem: this pipeline optimizes for **textual similarity**, not **semantic connection**. Questions about decision-making rationale, system interdependencies, or temporal changes consistently fail because the system retrieves chunks that look similar rather than chunks that are actually connected.
+---
 
-Graph RAG reframes this entirely. It makes **relationships** first-class citizens during preprocessing, not afterthoughts at query time.
+## Intro
+
+Do we really need Graph RAG?
+
+Short answer: sometimes yes. But only when your problem actually requires it.
+
+---
+
+## Understanding Traditional RAG’s Limitations
+
+Classic RAG works through four steps:
+
+- Break documents into chunks  
+- Embed them  
+- Retrieve top-K chunks  
+- Generate answers  
+
+👉 This works for simple retrieval
+
+But fails when relationships matter.
 
 ---
 
 ## Knowledge is Not Flat. It is a Graph.
 
-Human cognition operates through graph-based structures:
-- **Entities** — people, locations, concepts
-- **Relationships** — connections linking entities
-- **Cause and effect** — temporal sequences
-- **Hierarchies** — structural arrangements
+Humans think in:
 
-Documents contain this architecture implicitly. Graph RAG makes it explicit by constructing knowledge graphs rather than storing isolated text segments.
+- entities  
+- relationships  
+- cause and effect  
+- hierarchies  
 
-**Graph architecture:**
-- Nodes represent entities or concepts
-- Edges represent relationships
-- Context is preserved across multiple documents
+Graph RAG makes this explicit.
 
-The fundamental shift: from "locating similar text" to "discovering connected understanding."
+👉 Retrieval becomes:
+
+**connected knowledge instead of similar text**
 
 ---
 
 ## What Actually Changes with Graph RAG
 
-Three major transformations:
+### 1. Retrieval Becomes Relational
 
-**1. Retrieval Becomes Relational**
-Instead of isolated chunks, systems retrieve paths, neighborhoods, and graph substructures.
+You retrieve:
+- paths  
+- neighborhoods  
+- subgraphs  
 
-**2. Context Becomes Coherent**
-Language models examine entity relationships before generating responses — not just text similarity.
+---
 
-**3. Reasoning Becomes Grounded**
-Models access explicit relationship evidence rather than inferring connections from textual proximity. Connections are pre-extracted and structured during preprocessing.
+### 2. Context Becomes Coherent
 
-These changes dramatically improve responses to questions like:
-- Why did this decision occur?
-- How do these systems interconnect?
-- What shifted before versus after this event?
+The model sees relationships first
+
+---
+
+### 3. Reasoning Becomes Grounded
+
+Connections are already structured
 
 ---
 
 ## Why This Matters for Enterprise Use Cases
 
-Graph RAG shines in high-complexity domains:
+Graph RAG is useful in:
 
-- **Regulatory compliance and audits** — monitoring rule modifications and dependencies
-- **Enterprise architecture** — analyzing cascading failure patterns
-- **Healthcare workflows** — documenting patient care pathways
-- **Legal case histories** — linking precedents and references
-- **Internal knowledge repositories** — managing organizational information
-
-In these domains, the right answer isn't an isolated fact — it's a chain of connections.
+- compliance  
+- enterprise systems  
+- healthcare  
+- legal reasoning  
+- knowledge bases  
 
 ---
 
 ## When to Use Graph RAG (and When Not To)
 
-**Choose Graph RAG when:**
-- Questions demand multi-hop reasoning ("How does A connect to C via B?")
-- Entity deduplication is critical
-- Structural connections matter (org charts, technical architectures, supply chains)
-- Explainable, traceable reasoning chains are required
+### ✅ Use Graph RAG
 
-**Stick with traditional RAG when:**
-- Questions are straightforward lookups ("What does X mean?")
-- Semantic matching suffices (finding similar documents)
-- Content doesn't contain distinct entities
-- Rapid deployment with minimal preprocessing is essential
+- multi-hop reasoning  
+- identity resolution  
+- dependencies matter  
+
+### ❌ Use Traditional RAG
+
+- simple lookups  
+- semantic search  
+- fast setup  
 
 ---
 
 ## The Tradeoffs
 
-Graph RAG demands significant upfront investment: entity extraction, relationship design, ontology specification, extraction validation, and graph maintenance. Traditional RAG deploys faster and handles simpler retrieval scenarios effectively.
+Graph RAG:
+- more setup  
+- more structure  
 
-The analogy: basic FAQ systems benefit from traditional RAG; regulatory compliance management across an organization requires Graph RAG for accuracy.
+Traditional RAG:
+- faster  
+- simpler  
 
 ---
 
-## The Plot Thickens: A Bridgerton Demo
+## The Plot Thickens: Bridgerton Demo
 
-To make this concrete, I ran both systems on an identical question using Bridgerton-inspired data:
+To make this real, I built a demo.
 
-**Query:** "Who is the Lady in Silver, and how is she connected to Lord Penwood?"
+### Question:
 
-### Traditional RAG Result
+> Who is the Lady in Silver, and how is she connected to Lord Penwood?
 
-The system retrieved semantically related fragments: silver glove references, Penwood family insignia, Lady Araminta as Penwood's widow, a masked woman departing the event. Based on proximity, the model concluded Lady Araminta was the masked figure — **incorrect**. The critical Sophie Baek identity connection wasn't retrieved.
+---
 
-### Graph RAG Result
+### 📸 Scenario Image (Gemini)
 
-The system retrieved explicit relationship structures: identity links and genealogical connections. The correct reasoning chain reconstructed without speculation. Structure supplied the logic; no inferencing from textual nearness occurred.
+![Bridgerton Scenario](/images/bridgerton-scenario.png)
 
-Both implementations used **identical base information** — just represented differently:
-- Traditional RAG: indexed text
-- Graph RAG: indexed structured entities and relationships
+---
+
+## Traditional RAG
+
+- retrieves similar chunks  
+- finds references  
+
+👉 Conclusion:
+
+Lady Araminta = Lady in Silver  
+
+👉 Sounds correct  
+👉 Actually wrong  
+
+---
+
+### 📸 Traditional RAG Output
+
+![Traditional RAG Output](/images/traditional-rag-output.png)
+
+---
+
+## Graph RAG
+
+- retrieves relationships  
+- identifies correct entity  
+
+👉 Result:
+
+Correct answer + reasoning  
+
+---
+
+### 📸 Knowledge Graph
+
+![Bridgerton Knowledge Graph](/images/bridgerton-graph.png)
+
+---
+
+## 🎥 Full Demo Video
+
+<iframe 
+  style="aspect-ratio: 16/9; width: 100%;" 
+  src="https://www.youtube.com/embed/hRqE9qNrwvU" 
+  title="Graph RAG Demo"
+  frameborder="0"
+  allowfullscreen>
+</iframe>
 
 ---
 
 ## Try It Yourself
 
-A working comparison demo runs entirely locally via Ollama — no API charges, no external dependencies.
+I built a local demo:
 
-**GitHub:** [graph-rag-bridgerton-demo](https://github.com/lulu3202/graph-rag-bridgerton-demo)
+https://github.com/lulu3202/graph-rag-bridgerton-demo  
 
-The README has full setup instructions.
-
----
-
-## What's Next for Graph RAG
-
-Active development areas:
-- **Scalability** — maintaining graph quality across millions of nodes
-- **Ontology design** — identifying relevant domain relationships
-- **Dynamic updates** — adding new information without complete reconstruction
-- **Hybrid retrieval** — knowing when to use graphs, vectors, or both
-
-The emerging frontier: adaptive mechanisms that learn query-specific retrieval tactics, merging vector semantic strength with graph structural reasoning.
+- runs locally  
+- no API cost  
 
 ---
 
-## The Bottom Line
+## What’s Next for Graph RAG
 
-Graph RAG doesn't replace RAG — it advances it.
+Still evolving:
 
-- **Vectors** for semantic recovery
-- **Graphs** for reasoning and structure
-
-Together, they replicate how humans actually retrieve and reason.
-
-> "If classic RAG taught LLMs how to look things up, Graph RAG teaches them how to understand."
+- scalability  
+- ontology design  
+- hybrid retrieval  
 
 ---
 
-*Originally published on [Towards AI](https://pub.towardsai.net/from-chunks-to-connections-the-case-for-graph-rag-5fc8ce37a871).*
+## Outro
+
+Graph RAG is not replacing RAG.
+
+👉 It’s evolving it.
+
+---
+
+## Key Insight
+
+> Traditional RAG retrieves text  
+> Graph RAG retrieves meaning  
+
+---
+
+## TL;DR (Again)
+
+- RAG = text  
+- Graph RAG = relationships  
+- Use it when structure matters  
+
+---
+
+## 📩 Subscribe
+
+If you're building AI systems:
+
+I share practical workflows, tools, and experiments every time I publish.
