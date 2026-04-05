@@ -1,0 +1,157 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { readingTime } from '../../utils/readingTime';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content, headings } = await post.render();
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+// Related posts: same tags, exclude current
+const allPosts = await getCollection('blog');
+const related = allPosts
+  .filter((p) => p.slug !== post.slug && p.data.tags.some((t) => post.data.tags.includes(t)))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+
+const h2headings = headings.filter((h) => h.depth === 2);
+
+function formatDate(date: Date) {
+  return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+
+const estReadTime = readingTime(post.body);
+const canonicalUrl = post.data.canonicalUrl ?? `https://devislabai.com/blog/${post.slug}/`;
+---
+
+<BaseLayout
+  title={`${post.data.title} | Devi Priya K`}
+  description={post.data.description}
+  ogImage={post.data.image}
+>
+  <!-- Override canonical for blog posts -->
+  <link rel="canonical" href={canonicalUrl} slot="head" />
+
+  <article class="blog-post">
+
+    <!-- Hero image -->
+    {post.data.image && (
+      <div class="post-hero-image">
+        <img
+          src={`${base}/images/${post.data.image}`}
+          alt={post.data.title}
+          width="1100"
+          height="500"
+          loading="eager"
+        />
+      </div>
+    )}
+
+    <div class="container post-layout">
+
+      <!-- Sidebar: TOC -->
+      {h2headings.length > 1 && (
+        <aside class="post-toc">
+          <p class="toc-label">Contents</p>
+          <nav>
+            <ul>
+              {h2headings.map((h) => (
+                <li><a href={`#${h.slug}`}>{h.text}</a></li>
+              ))}
+            </ul>
+          </nav>
+        </aside>
+      )}
+
+      <!-- Main content -->
+      <div class="post-main">
+
+        <!-- Header -->
+        <header class="post-header">
+          <div class="post-meta">
+            <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
+            <span class="post-meta-sep">·</span>
+            <span>{estReadTime}</span>
+            {post.data.updated && (
+              <>
+                <span class="post-meta-sep">·</span>
+                <span>Updated {formatDate(post.data.updated)}</span>
+              </>
+            )}
+          </div>
+          <h1 class="post-title">{post.data.title}</h1>
+          <p class="post-description">{post.data.description}</p>
+          {post.data.tags.length > 0 && (
+            <div class="blog-card-tags">
+              {post.data.tags.map((tag) => (
+                <span class="blog-tag">{tag}</span>
+              ))}
+            </div>
+          )}
+        </header>
+
+        <!-- Article body -->
+        <div class="post-body prose">
+          <Content />
+        </div>
+
+        <!-- Newsletter -->
+        <div class="post-newsletter">
+          <h2>Get a free template with every video</h2>
+          <p>Every video I publish comes with a free Claude Code template. Join the newsletter.</p>
+          <script async src="https://subscribe-forms.beehiiv.com/embed.js"></script>
+          <iframe src="https://subscribe-forms.beehiiv.com/f2aa3d0d-ccfc-40ed-a524-e1068c747cdb" class="beehiiv-embed" data-test-id="beehiiv-embed" frameborder="0" scrolling="no" style="width: 560px; height: 315px; margin: 0; border-radius: 0px !important; background-color: transparent; box-shadow: 0 0 #0000; max-width: 100%;"></iframe>
+        </div>
+
+        <!-- Author -->
+        <div class="post-author">
+          <img
+            src={`${base}/images/profile.jpeg`}
+            alt="Devi Priya K"
+            class="post-author-img"
+            width="60"
+            height="60"
+          />
+          <div>
+            <p class="post-author-name">Devi Priya K</p>
+            <p class="post-author-bio">Senior AI Product Manager and content creator. I build AI-powered content and visibility systems using Claude Code.</p>
+            <a href={`${base}/about/`} class="post-author-link">About me →</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </article>
+
+  <!-- Related posts -->
+  {related.length > 0 && (
+    <section class="section" style="background: var(--color-surface-alt);">
+      <div class="container">
+        <div class="section-header">
+          <h2>Related Posts</h2>
+        </div>
+        <div class="blog-listing blog-listing--related">
+          {related.map((p) => (
+            <article class="blog-card blog-card--sm">
+              <div class="blog-card-body">
+                <div class="blog-card-meta">
+                  <time datetime={p.data.date.toISOString()}>{formatDate(p.data.date)}</time>
+                </div>
+                <h3 class="blog-card-title blog-card-title--sm">
+                  <a href={`${base}/blog/${p.slug}/`}>{p.data.title}</a>
+                </h3>
+                <p class="blog-card-desc">{p.data.description}</p>
+                <a href={`${base}/blog/${p.slug}/`} class="blog-read-link">Read post →</a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+</BaseLayout>

@@ -1,0 +1,73 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+function formatDate(date: Date) {
+  return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+---
+
+<BaseLayout
+  title="Blog | Devi Priya K"
+  description="Tutorials and deep-dives on AI content systems, cloud, and GenAI."
+>
+  <div class="page-header">
+    <div class="container">
+      <h1>Blog</h1>
+      <p>Tutorials and deep-dives on AI content systems, cloud, and GenAI.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container blog-listing">
+      {posts.map((post) => (
+        <article class="blog-card">
+          {post.data.image && (
+            <a href={`${base}/blog/${post.slug}/`} class="blog-card-image-link">
+              <img
+                src={`${base}/images/${post.data.image}`}
+                alt={post.data.title}
+                class="blog-card-image"
+                width="360"
+                height="200"
+                loading="lazy"
+              />
+            </a>
+          )}
+          <div class="blog-card-body">
+            <div class="blog-card-meta">
+              <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
+              {post.data.tags.length > 0 && (
+                <div class="blog-card-tags">
+                  {post.data.tags.map((tag) => (
+                    <span class="blog-tag">{tag}</span>
+                  ))}
+                </div>
+              )}
+            </div>
+            <h2 class="blog-card-title">
+              <a href={`${base}/blog/${post.slug}/`}>{post.data.title}</a>
+            </h2>
+            <p class="blog-card-desc">{post.data.description}</p>
+            <a href={`${base}/blog/${post.slug}/`} class="blog-read-link">Read post →</a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="section-sm" style="background: var(--color-surface-alt);">
+    <div class="container" style="text-align: center;">
+      <h2 style="margin-bottom: 0.75rem;">Get a free template with every video</h2>
+      <p style="margin-bottom: 1.5rem;">Join the newsletter and get each new template delivered.</p>
+      <script async src="https://subscribe-forms.beehiiv.com/embed.js"></script>
+      <iframe src="https://subscribe-forms.beehiiv.com/f2aa3d0d-ccfc-40ed-a524-e1068c747cdb" class="beehiiv-embed" data-test-id="beehiiv-embed" frameborder="0" scrolling="no" style="width: 560px; height: 315px; margin: 0 auto; border-radius: 0px !important; background-color: transparent; box-shadow: 0 0 #0000; max-width: 100%;"></iframe>
+    </div>
+  </section>
+</BaseLayout>
