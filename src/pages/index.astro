@@ -20,8 +20,8 @@ const featuredArticles = articles.filter((a) => a.featured).slice(0, 3);
   <section class="section home-featured-section">
     <div class="container">
       <div class="section-header">
-        <h2>Featured Projects</h2>
-        <p>Applied AI work — built to learn, shared to teach.</p>
+        <h2>Systems I've Built</h2>
+        <p>AI-powered systems I use and teach — built with Claude Code.</p>
       </div>
       <div style="display: flex; flex-direction: column; gap: 1.5rem;">
         {featuredProjects.map((project) => (
@@ -37,7 +37,7 @@ const featuredArticles = articles.filter((a) => a.featured).slice(0, 3);
         ))}
       </div>
       <div class="home-section-cta">
-        <a href={`${base}/projects/`} class="btn btn-outline">See All Projects →</a>
+        <a href={`${base}/templates/`} class="btn btn-outline">See All Templates →</a>
       </div>
     </div>
   </section>
