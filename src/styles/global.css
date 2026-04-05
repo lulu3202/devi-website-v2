@@ -279,6 +279,192 @@ p {
 
 /* 7. FOOTER
    ============================================== */
+
+/* Footer newsletter */
+.footer-newsletter {
+  text-align: center;
+  padding: 1rem 0 0.5rem;
+}
+
+.footer-newsletter-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 0.75rem;
+}
+
+/* 7b. TEMPLATE CARDS
+   ============================================== */
+.template-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1.75rem;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.template-card:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+}
+
+.template-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.template-card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.template-card-desc {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  flex: 1;
+}
+
+.template-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-coral);
+  margin-top: 0.5rem;
+  transition: gap 0.15s ease;
+}
+
+.template-card-link:hover {
+  gap: 0.6rem;
+}
+
+/* 7c. TEMPLATE PAGE
+   ============================================== */
+.template-page {
+  max-width: 760px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.template-resources h2,
+.template-video h2,
+.template-newsletter h2 {
+  font-size: 1.35rem;
+  margin-bottom: 1.25rem;
+}
+
+.template-resource-links {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.resource-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem 1.25rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  text-decoration: none;
+}
+
+.resource-card:hover {
+  border-color: var(--color-coral);
+  box-shadow: 0 4px 14px rgba(255, 107, 107, 0.12);
+}
+
+.resource-card--placeholder {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.resource-card--placeholder:hover {
+  border-color: var(--color-border);
+  box-shadow: none;
+}
+
+.resource-icon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.resource-card div {
+  flex: 1;
+}
+
+.resource-card strong {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--color-text);
+}
+
+.resource-card span {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+}
+
+.resource-arrow {
+  font-size: 1rem;
+  color: var(--color-coral);
+  flex-shrink: 0;
+}
+
+.video-placeholder {
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 3rem;
+  text-align: center;
+}
+
+.template-newsletter {
+  background: var(--color-coral-light);
+  border: 1px solid rgba(255, 107, 107, 0.2);
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  text-align: center;
+}
+
+.template-newsletter h2 {
+  color: var(--color-coral);
+  margin-bottom: 0.75rem;
+}
+
+.template-newsletter p {
+  margin-bottom: 1.5rem;
+}
+
+/* Newsletter placeholder text */
+.newsletter-placeholder-text {
+  font-size: 0.9rem;
+  color: var(--color-text-muted) !important;
+}
+
+/* Hero newsletter */
+.hero-newsletter {
+  margin-top: 0.25rem;
+}
+
+.hero-newsletter-label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin-bottom: 0.5rem;
+}
 .footer {
   background: var(--color-surface);
   border-top: 1px solid var(--color-border);
@@ -1238,4 +1424,14 @@ p {
   .project-card {
     display: block;
   }
+
+  /* Template cards responsive */
+  .template-resource-links {
+    grid-template-columns: 1fr !important;
+  }
+
+  .template-page {
+    max-width: 100% !important;
+  }
+}
 }

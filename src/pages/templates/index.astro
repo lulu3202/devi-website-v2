@@ -1,0 +1,31 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import TemplateCard from '@components/TemplateCard.astro';
+import { templates } from '@data/templates';
+---
+
+<BaseLayout
+  title="Free Templates | Devi Priya K"
+  description="Free Claude Code project templates from every video. Set up in 5 minutes."
+>
+  <div class="page-header">
+    <div class="container">
+      <h1>Free Templates</h1>
+      <p>Claude Code project templates from every video. Set up in 5 minutes.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid-2">
+        {templates.map((template) => (
+          <TemplateCard
+            slug={template.slug}
+            title={template.title}
+            description={template.description}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -3,8 +3,10 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 import Hero from '@components/Hero.astro';
 import ProjectCard from '@components/ProjectCard.astro';
 import ArticleCard from '@components/ArticleCard.astro';
+import TemplateCard from '@components/TemplateCard.astro';
 import { projects } from '@data/projects';
 import { articles } from '@data/articles';
+import { templates } from '@data/templates';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const featuredProjects = projects.filter((p) => p.featured).slice(0, 3);
@@ -63,26 +65,24 @@ const featuredArticles = articles.filter((a) => a.featured).slice(0, 3);
     </div>
   </section>
 
-  <!-- YouTube CTA -->
+  <!-- Free Templates -->
   <section class="section">
     <div class="container">
-      <div class="cta-section">
-        <h2>Watch on Devi's Lab</h2>
-        <p>
-          Every article has a matching video — step-by-step walkthroughs of Cloud, AI,
-          and GenAI applications on my YouTube channel.
-        </p>
-        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-          <a href={`${base}/youtube/`} class="btn btn-white">Watch Videos</a>
-          <a
-            href="https://www.youtube.com/@devislab"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="btn btn-white-outline"
-          >
-            Subscribe →
-          </a>
-        </div>
+      <div class="section-header">
+        <h2>Free Templates</h2>
+        <p>Claude Code project templates from every video. Set up in 5 minutes.</p>
+      </div>
+      <div class="grid-2">
+        {templates.map((template) => (
+          <TemplateCard
+            slug={template.slug}
+            title={template.title}
+            description={template.description}
+          />
+        ))}
+      </div>
+      <div class="home-section-cta">
+        <a href={`${base}/templates/`} class="btn btn-outline">See All Templates →</a>
       </div>
     </div>
   </section>
