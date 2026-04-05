@@ -1,53 +1,24 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Hero from '@components/Hero.astro';
-import ProjectCard from '@components/ProjectCard.astro';
 import ArticleCard from '@components/ArticleCard.astro';
 import TemplateCard from '@components/TemplateCard.astro';
-import { projects } from '@data/projects';
 import { articles } from '@data/articles';
 import { templates } from '@data/templates';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const featuredProjects = projects.filter((p) => p.featured).slice(0, 3);
 const featuredArticles = articles.filter((a) => a.featured).slice(0, 3);
 ---
 
-<BaseLayout title="Devi Priya K | Content + AI">
+<BaseLayout title="Devi Priya K | AI Content & Visibility Systems">
   <Hero />
-
-  <!-- Featured Projects -->
-  <section class="section home-featured-section">
-    <div class="container">
-      <div class="section-header">
-        <h2>Systems I've Built</h2>
-        <p>AI-powered systems I use and teach — built with Claude Code.</p>
-      </div>
-      <div style="display: flex; flex-direction: column; gap: 1.5rem;">
-        {featuredProjects.map((project) => (
-          <ProjectCard
-            title={project.title}
-            description={project.description}
-            image={project.image}
-            tags={project.tags}
-            githubUrl={project.githubUrl}
-            blogUrl={project.blogUrl}
-            youtubeUrl={project.youtubeUrl}
-          />
-        ))}
-      </div>
-      <div class="home-section-cta">
-        <a href={`${base}/templates/`} class="btn btn-outline">See All Templates →</a>
-      </div>
-    </div>
-  </section>
 
   <!-- Latest Writing -->
   <section class="section" style="background: var(--color-surface-alt);">
     <div class="container">
       <div class="section-header">
         <h2>Latest Writing</h2>
-        <p>Beginner-friendly tutorials on AI tools, cloud, and GenAI applications.</p>
+        <p>Tutorials and deep-dives on AI content systems, cloud, and GenAI.</p>
       </div>
       <div class="grid-3">
         {featuredArticles.map((article) => (
