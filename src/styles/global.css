@@ -280,7 +280,14 @@ p {
 /* 7. BLOG
    ============================================== */
 
-/* Blog listing */
+/* Blog grid — listing page */
+.blog-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+/* Blog listing (related / home) */
 .blog-listing {
   display: flex;
   flex-direction: column;
@@ -305,6 +312,120 @@ p {
   border-radius: var(--radius-md);
   overflow: hidden;
   transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+/* Cover image / gradient */
+.blog-card-cover-link {
+  display: block;
+}
+
+.blog-card-cover-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+.blog-card-cover-gradient {
+  width: 100%;
+  height: 180px;
+  display: flex;
+  align-items: flex-end;
+  padding: 1.25rem;
+  position: relative;
+}
+
+.blog-card-cover-tag {
+  background: rgba(255,255,255,0.25);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.25rem 0.65rem;
+  border-radius: 100px;
+  backdrop-filter: blur(4px);
+}
+
+/* Post gradient hero */
+.post-hero-gradient {
+  width: 100%;
+  min-height: 380px;
+  display: flex;
+  align-items: center;
+}
+
+.post-hero-gradient-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+  width: 100%;
+}
+
+.post-hero-tags {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.post-hero-tag {
+  background: rgba(255,255,255,0.25);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.3rem 0.75rem;
+  border-radius: 100px;
+  backdrop-filter: blur(4px);
+}
+
+.post-hero-gradient-title {
+  color: #fff;
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  line-height: 1.15;
+  margin-bottom: 1rem;
+  max-width: 760px;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.18);
+}
+
+.post-hero-gradient-desc {
+  color: rgba(255,255,255,0.88);
+  font-size: 1.05rem;
+  max-width: 620px;
+  line-height: 1.7;
+}
+
+/* YouTube embed in post */
+.post-youtube {
+  margin: 2rem 0;
+}
+
+.post-youtube-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.post-youtube-wrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+}
+
+.post-youtube-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
 }
 
 .blog-card:hover {
@@ -1817,6 +1938,10 @@ p {
 }
 
 @media (min-width: 900px) {
+  .blog-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .blog-listing--related {
     grid-template-columns: repeat(3, 1fr);
   }

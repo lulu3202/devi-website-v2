@@ -10,6 +10,18 @@ const posts = (await getCollection('blog')).sort(
 function formatDate(date: Date) {
   return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 }
+
+const tagGradients: Record<string, string> = {
+  'Claude':        'linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%)',
+  'AI Tools':      'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+  'LangGraph':     'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)',
+  'Agno':          'linear-gradient(135deg, #FC5C7D 0%, #6A3093 100%)',
+  'RAG':           'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+  'AWS':           'linear-gradient(135deg, #f7971e 0%, #ffd200 100%)',
+  'Gemini':        'linear-gradient(135deg, #4285F4 0%, #34A853 100%)',
+  'Python':        'linear-gradient(135deg, #3776ab 0%, #ffd343 100%)',
+  'Certifications':'linear-gradient(135deg, #f7971e 0%, #ffd200 100%)',
+};
 ---
 
 <BaseLayout
@@ -24,40 +36,50 @@ function formatDate(date: Date) {
   </div>
 
   <section class="section">
-    <div class="container blog-listing">
-      {posts.map((post) => (
-        <article class="blog-card">
-          {post.data.image && (
-            <a href={`${base}/blog/${post.slug}/`} class="blog-card-image-link">
-              <img
-                src={`${base}/images/${post.data.image}`}
-                alt={post.data.title}
-                class="blog-card-image"
-                width="360"
-                height="200"
-                loading="lazy"
-              />
-            </a>
-          )}
-          <div class="blog-card-body">
-            <div class="blog-card-meta">
-              <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
-              {post.data.tags.length > 0 && (
-                <div class="blog-card-tags">
-                  {post.data.tags.map((tag) => (
-                    <span class="blog-tag">{tag}</span>
-                  ))}
+    <div class="container">
+      <div class="blog-grid">
+        {posts.map((post) => {
+          const firstTag = post.data.tags[0] ?? '';
+          const gradient = tagGradients[firstTag] ?? 'linear-gradient(135deg, #FF6B6B 0%, #E85555 100%)';
+          return (
+            <article class="blog-card">
+              <a href={`${base}/blog/${post.slug}/`} class="blog-card-cover-link">
+                {post.data.image ? (
+                  <img
+                    src={`${base}/images/${post.data.image}`}
+                    alt={post.data.title}
+                    class="blog-card-cover-img"
+                    width="400"
+                    height="220"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div class="blog-card-cover-gradient" style={`background: ${gradient};`}>
+                    <span class="blog-card-cover-tag">{firstTag || 'AI'}</span>
+                  </div>
+                )}
+              </a>
+              <div class="blog-card-body">
+                <div class="blog-card-meta">
+                  <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
+                  {post.data.tags.length > 0 && (
+                    <div class="blog-card-tags">
+                      {post.data.tags.slice(0, 2).map((tag) => (
+                        <span class="blog-tag">{tag}</span>
+                      ))}
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
-            <h2 class="blog-card-title">
-              <a href={`${base}/blog/${post.slug}/`}>{post.data.title}</a>
-            </h2>
-            <p class="blog-card-desc">{post.data.description}</p>
-            <a href={`${base}/blog/${post.slug}/`} class="blog-read-link">Read post →</a>
-          </div>
-        </article>
-      ))}
+                <h2 class="blog-card-title">
+                  <a href={`${base}/blog/${post.slug}/`}>{post.data.title}</a>
+                </h2>
+                <p class="blog-card-desc">{post.data.description}</p>
+                <a href={`${base}/blog/${post.slug}/`} class="blog-read-link">Read post →</a>
+              </div>
+            </article>
+          );
+        })}
+      </div>
     </div>
   </section>
 

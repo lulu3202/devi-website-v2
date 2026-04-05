@@ -8,6 +8,7 @@ const blog = defineCollection({
     date: z.coerce.date(),
     updated: z.coerce.date().optional(),
     image: z.string().optional(),
+    youtubeVideoId: z.string().optional(),
     tags: z.array(z.string()).default([]),
     canonicalUrl: z.string().optional(),
   }),

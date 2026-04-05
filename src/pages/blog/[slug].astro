@@ -27,6 +27,21 @@ function formatDate(date: Date) {
 
 const estReadTime = readingTime(post.body);
 const canonicalUrl = post.data.canonicalUrl ?? `https://devislabai.com/blog/${post.slug}/`;
+
+// Pick a gradient per post based on first tag
+const tagGradients: Record<string, string> = {
+  'Claude':       'linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%)',
+  'AI Tools':     'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+  'LangGraph':    'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)',
+  'Agno':         'linear-gradient(135deg, #FC5C7D 0%, #6A3093 100%)',
+  'RAG':          'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+  'AWS':          'linear-gradient(135deg, #f7971e 0%, #ffd200 100%)',
+  'Gemini':       'linear-gradient(135deg, #4285F4 0%, #34A853 100%)',
+  'Python':       'linear-gradient(135deg, #3776ab 0%, #ffd343 100%)',
+  'Certifications':'linear-gradient(135deg, #f7971e 0%, #ffd200 100%)',
+};
+const firstTag = post.data.tags[0] ?? '';
+const coverGradient = tagGradients[firstTag] ?? 'linear-gradient(135deg, #FF6B6B 0%, #E85555 100%)';
 ---
 
 <BaseLayout
@@ -34,21 +49,32 @@ const canonicalUrl = post.data.canonicalUrl ?? `https://devislabai.com/blog/${po
   description={post.data.description}
   ogImage={post.data.image}
 >
-  <!-- Override canonical for blog posts -->
   <link rel="canonical" href={canonicalUrl} slot="head" />
 
   <article class="blog-post">
 
-    <!-- Hero image -->
-    {post.data.image && (
+    <!-- Hero: real image or gradient cover -->
+    {post.data.image ? (
       <div class="post-hero-image">
         <img
           src={`${base}/images/${post.data.image}`}
           alt={post.data.title}
           width="1100"
-          height="500"
+          height="460"
           loading="eager"
         />
+      </div>
+    ) : (
+      <div class="post-hero-gradient" style={`background: ${coverGradient};`}>
+        <div class="post-hero-gradient-inner">
+          <div class="post-hero-tags">
+            {post.data.tags.slice(0, 3).map((tag) => (
+              <span class="post-hero-tag">{tag}</span>
+            ))}
+          </div>
+          <h1 class="post-hero-gradient-title">{post.data.title}</h1>
+          <p class="post-hero-gradient-desc">{post.data.description}</p>
+        </div>
       </div>
     )}
 
@@ -71,7 +97,7 @@ const canonicalUrl = post.data.canonicalUrl ?? `https://devislabai.com/blog/${po
       <!-- Main content -->
       <div class="post-main">
 
-        <!-- Header -->
+        <!-- Header (shown below gradient; simpler if using real image) -->
         <header class="post-header">
           <div class="post-meta">
             <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
@@ -84,16 +110,36 @@ const canonicalUrl = post.data.canonicalUrl ?? `https://devislabai.com/blog/${po
               </>
             )}
           </div>
-          <h1 class="post-title">{post.data.title}</h1>
-          <p class="post-description">{post.data.description}</p>
+          {post.data.image && (
+            <>
+              <h1 class="post-title">{post.data.title}</h1>
+              <p class="post-description">{post.data.description}</p>
+            </>
+          )}
           {post.data.tags.length > 0 && (
-            <div class="blog-card-tags">
+            <div class="blog-card-tags" style="margin-top: 0.75rem;">
               {post.data.tags.map((tag) => (
                 <span class="blog-tag">{tag}</span>
               ))}
             </div>
           )}
         </header>
+
+        <!-- YouTube embed (if youtubeVideoId is set in frontmatter) -->
+        {post.data.youtubeVideoId && (
+          <div class="post-youtube">
+            <p class="post-youtube-label">Watch the video walkthrough</p>
+            <div class="post-youtube-wrapper">
+              <iframe
+                src={`https://www.youtube.com/embed/${post.data.youtubeVideoId}`}
+                title={post.data.title}
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+        )}
 
         <!-- Article body -->
         <div class="post-body prose">
