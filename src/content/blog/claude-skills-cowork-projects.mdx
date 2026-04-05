@@ -1,11 +1,101 @@
 ---
-title: "Getting Started with Claude: A 101 Guide to Claude Skills and Cowork Projects"
-description: "A beginner-friendly guide to Claude's AI Skills and Cowork Projects — from setup to your first automation, no prior experience needed."
-date: "2024-11-15"
+title: "A 101 Guide to Claude Skills and Cowork Projects"
+description: "A beginner-friendly walkthrough of Claude Skills and Cowork Projects — from setup to your first automation, featuring a One Piece demo."
+date: "2026-03-29"
 tags: ["Claude", "AI Tools", "Automation", "Beginners"]
 canonicalUrl: "https://devislabai.com/blog/claude-skills-cowork-projects/"
 ---
 
-> This post is being migrated from Medium. Full content coming soon.
+*Part 1 of my Getting Started with Claude series.*
 
-Read the full article on [Towards AI](https://medium.com/towards-artificial-intelligence/a-101-guide-to-claude-skills-and-cowork-projects-fd3acae6d7c8).
+Claude has dominated recent months with continuous updates from Anthropic. Rather than chase every new feature, this post is about establishing foundational understanding. No prior Claude experience needed.
+
+By the end, you'll know how to: use **Skills** (launched late 2025) and understand **Projects in Cowork** (launched March 2026). I'll use One Piece Season 2 as the demo subject — because why not.
+
+---
+
+## What Are Claude Skills
+
+Claude can generate reports with clean structure, but specific use cases require customization. I wanted an 8-page One Piece digital zine; without skill guidance, Claude produced "a plain PDF that felt like a school report."
+
+Skills are instruction sets (markdown files) loaded into Claude's context to give it new capabilities. Think of them less like plugins and more like a detailed recipe: here are the ingredients, here's the method.
+
+Anthropic maintains public skills for Word documents, PDFs, spreadsheets, and PowerPoint files. For this demo I used two:
+- Anthropic's `docx` skill for formatted Word documents
+- A custom zine skill — styled HTML with specific layout, typography, One Piece's official color palette, and a page-reveal animation
+
+The workflow chains both: the docx skill produces research, then the zine skill transforms that research into finished output.
+
+---
+
+## What Projects vs Cowork Projects Actually Are
+
+Projects existed in claude.ai already. Claude later introduced **Projects for Cowork**. I find Cowork Projects most useful for local folder work; regular Projects suit ongoing tasks without local files.
+
+Cowork Projects give Claude more context. Everything related to your goal — conversations, local files, instructions, skills — lives in one place. Claude knows the project's purpose without re-explanation each time you open it.
+
+**Components of a Cowork Project:**
+
+- **Instructions** — define project purpose and Claude's role (one short paragraph is optimal)
+- **Skills** — workflows available in every project conversation
+- **Memory** — facts Claude recalls across sessions
+- **Folders** — all files on disk
+
+> **Mental Model:** Folders are where your work lives → Projects are where you do the work → Skills are how Claude does it well.
+
+---
+
+## The Demo: One Piece Skill and Project Setup
+
+Netflix's One Piece Season 2 launched recently. Creator Eiichiro Oda began the series in 1997 at age 22; it became the best-selling manga in history with over 500 million copies sold. Season 2 — "Into the Grand Line" — dropped March 10, 2026, trending #1 on Netflix.
+
+I set up an "One Piece Content Hub" in Cowork with:
+- Two folders: `research/` and `output/`
+- Two loaded skills: Anthropic's docx skill + custom One Piece zine skill
+
+**Project instructions defined a two-step workflow:**
+1. Use docx skill to produce a research document on the provided topic, save to `research/` folder
+2. Use zine skill to transform research into styled HTML zine, save to `output/` folder
+
+### Prompt 1 — Research Document
+
+```
+Create a research document about One Piece; cover Eiichiro Oda as the author, 
+the manga series and why it became the best-selling of all time, how Oda was 
+personally involved in the Netflix live-action casting, why the adaptation worked, 
+and a timeline of key milestones including Season 1 and Season 2.
+```
+
+Output: `research/one-piece-research.docx`
+
+### Prompt 2 — Zine
+
+```
+Transform the research document in the research folder into an interactive One Piece zine.
+```
+
+Output: `output/onepiece-zine.html`
+
+The zine opens with a cover page featuring One Piece title treatment in bold Bebas Neue typography with a red shadow, gold subtitle, a decorative sun circle, and a wave pattern — using official colors:
+
+- Midnight: `#2E333F`
+- Luffy red: `#D70000`
+- Ocean blue: `#2E62A3`
+- Sky blue: `#62C3F8`
+- Gold: `#FFCD00`
+
+All eight pages reveal sequentially. The HTML file opens in any browser, can be shared as a link, or printed.
+
+---
+
+## When This Setup Is Worth It (And When It Isn't)
+
+Skills and Projects are worth setting up when:
+- You're producing the **same output type repeatedly**
+- **Format itself communicates meaning** (a zine vs a plain doc)
+
+Skip the setup for plain text work — quick emails, decision drafting, brainstorming — where a fresh conversation suffices and the overhead outweighs the benefit.
+
+---
+
+*Originally published on [Towards AI](https://medium.com/towards-artificial-intelligence/a-101-guide-to-claude-skills-and-cowork-projects-fd3acae6d7c8).*

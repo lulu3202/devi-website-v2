@@ -1,0 +1,134 @@
+---
+title: "A Primer on Using Google's Gemini API to Improve Your Photography"
+description: "How to use the Gemini API to build a photography critique app that gives intelligent, actionable feedback on your shots — free and beginner-friendly."
+date: "2024-11-03"
+tags: ["Gemini", "Google AI", "Python", "Streamlit", "Computer Vision"]
+canonicalUrl: "https://devislabai.com/blog/gemini-api-photography/"
+---
+
+*Part 1 of a 2-part beginner series exploring fun generative AI use cases with Gemini.*
+
+As someone who transitioned from product management to development, I started exploring AI applications two years ago. One project I kept coming back to: a photo critique tool. I love photography, and the idea of AI giving me actionable feedback on my shots — composition, lighting, exposure — was genuinely exciting.
+
+This tutorial walks through building a **Photo Critique and Enhancement App** using Google's Gemini-1.5-Flash-8B API and Streamlit, at no cost.
+
+**Who this is for:** Amateur photographers wanting to improve, and anyone curious about Gemini API inferencing.
+
+---
+
+## Overview of Google's Gemini Flash API
+
+> "Gemini 1.5-Flash-8B is designed for speed and efficiency and is multimodal, meaning it can accept text, image, and video inputs and return text-based feedback."
+
+It's fast, free to start, and handles images natively — perfect for a photo critique use case.
+
+---
+
+## Three AI Concepts Worth Understanding
+
+Before diving into code, three concepts to know:
+
+**Training** — AI models learn patterns from large, varied datasets. The Gemini model used here was developed by Google's DeepMind team.
+
+**Inference** — The operational phase where a trained model accepts inputs and produces outputs. This tutorial is all about inference.
+
+**Fine-Tuning** — Specializing a pre-trained model by training it further on targeted data. We don't fine-tune here — we use the base Gemini model as-is.
+
+---
+
+## Getting Access
+
+1. Go to [Google AI Studio](https://aistudio.google.com)
+2. Create an API key (free)
+3. Add it to a `.env` file as `API_KEY=your_key_here`
+
+---
+
+## Building the Photo Critique App
+
+### Step 1: Install and Import
+
+```python
+import os
+from dotenv import load_dotenv
+import google.generativeai as genai
+import streamlit as st
+from PIL import Image
+
+load_dotenv()
+```
+
+### Step 2: Configure the API and Model
+
+```python
+API_KEY = os.getenv('API_KEY')
+if not API_KEY:
+    raise ValueError("No API key found. Please set API_KEY in your .env file.")
+
+genai.configure(api_key=API_KEY)
+model = genai.GenerativeModel("gemini-1.5-flash-8b")
+```
+
+### Step 3: Core Functions
+
+```python
+def get_gemini_response(input_prompt, image):
+    response = model.generate_content(
+        [input_prompt, image[0]]
+    )
+    return response.text
+
+def get_image_content(uploaded_file):
+    if uploaded_file is not None:
+        image_byte_data = uploaded_file.getvalue()
+        image_parts = [{
+            "mime_type": uploaded_file.type,
+            "data": image_byte_data
+        }]
+        return image_parts
+    else:
+        raise FileNotFoundError("File not uploaded")
+```
+
+### Step 4: Streamlit UI
+
+The interface includes:
+- A sidebar for selecting critique aspects (limited to three)
+- A file uploader accepting JPG, PNG, JPEG
+- A submit button that triggers Gemini analysis
+- Formatted output with two sections: critique areas + improvement suggestions
+
+**Critique categories you can select:**
+- Composition
+- Lighting
+- Focus and Sharpness
+- Exposure
+- Color Balance
+- Creativity and Impact
+
+### Step 5: Run It
+
+```bash
+streamlit run app.py
+```
+
+---
+
+## What You Get
+
+Each analysis returns two organized sections with three numbered points each:
+
+1. **Critique Areas** — specific observations on the aspects you selected
+2. **Improvement Suggestions** — actionable changes to make your next shot better
+
+---
+
+## What's Next
+
+This is Part 1. Part 2 extends the app further — stay tuned.
+
+The bigger takeaway: multimodal AI opens up creative applications beyond chatbots. Photography is one. Music, visual art, culinary — the same pattern applies.
+
+---
+
+*Originally published on [Towards AI](https://pub.towardsai.net/a-primer-on-using-googles-gemini-api-to-improve-your-photography-7862dc8dbaec).*

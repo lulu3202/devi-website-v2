@@ -1,0 +1,154 @@
+---
+title: "Agentic Framework Deep Dive Series (Part 2): Agno"
+description: "A deep dive into the Agno agentic framework — key concepts, how it compares to LangGraph, and a hands-on Python Code Explainer app with GIFs."
+date: "2025-04-02"
+tags: ["Agno", "Agentic AI", "Python", "Streamlit", "Multi-Agent"]
+canonicalUrl: "https://devislabai.com/blog/agentic-framework-agno/"
+---
+
+*Part 2 of the Agentic Framework Deep Dive Series.*
+
+Welcome back. Part 1 covered LangGraph. Now we're exploring **Agno** — a lighter, faster framework for building agentic apps. Same structure: GitHub repo + blog post + companion YouTube video.
+
+One highlight: after publishing, I received a note from Agno's founder. Always a good sign.
+
+---
+
+## Agno — What, When & How
+
+### What Is Agno?
+
+> Agno is an open-source, lightweight framework for building AI agents and agentic AI applications.
+
+It enables creation of multi-modal agents with memory, external knowledge sources, and tool integration.
+
+**Agno vs LangGraph:**
+- Both support complex workflows
+- LangGraph gives you granular control over graph structure
+- Agno enables agent creation with fewer lines of code
+- "Agno is designed for speed and efficiency"
+
+### When Was It Built?
+
+Agno is approximately 2 years old with 22,000+ GitHub stars at time of writing.
+
+### How Does It Work?
+
+> "Agno exposes LLMs as a unified API and gives them superpowers like memory, knowledge, tools and reasoning."
+
+---
+
+## Key Components
+
+### 1. Agents
+
+Individual AI workers with specific instructions and tools. Four agency levels:
+
+- **Level 0** — No tools (basic inference)
+- **Level 1** — Tools for autonomous execution (Agno offers 80 toolkits with thousands of tools)
+- **Level 2** — Knowledge-enhanced agents combining memory and reasoning
+- **Level 3** — Multi-agent teams collaborating on complex workflows
+
+### 2. Tools
+
+Plugins enabling real-world interaction: web search, file system access, database queries. Agno ships with 80+ pre-built toolkits.
+
+### 3. Memory and Knowledge
+
+Agents remember past interactions and store information for contextual conversations. Supports vector database connections for RAG.
+
+### 4. Multi-Agent Orchestration
+
+Teams of specialized agents collaborating on complex, multi-step tasks requiring diverse skills.
+
+---
+
+## Hands-On Project: Python Code Explainer
+
+To demonstrate Agno, I built a **Python Code Explainer** — paste in a Python snippet and get a visual explanation with web context, GitHub examples, and a relevant GIF.
+
+Three agents work together:
+
+### Project Structure
+
+```bash
+agno_usecase/
+├── python_withgif.py  # Core agent logic
+├── app.py             # Streamlit web app
+├── playground.py      # Agno local UI (for debugging)
+├── .env               # Environment variables
+└── requirements.txt   # Dependencies
+```
+
+### Web Agent (DuckDuckGo)
+
+```python
+web_agent = Agent(
+    name="Web Agent",
+    role="Search the web for information about programming concepts",
+    model=OpenAIChat(id="gpt-4o"),
+    tools=[DuckDuckGoTools()],
+    instructions="Find relevant information on the web. Always include sources.",
+    show_tool_calls=True,
+    markdown=True,
+)
+```
+
+### GitHub Code Agent
+
+```python
+github_agent = Agent(
+    name="GitHub Code Agent",
+    role="Find code examples on GitHub",
+    model=OpenAIChat(id="gpt-4o"),
+    tools=[GithubTools(search_repositories=True)],
+    instructions="Find code examples on GitHub related to the user's query. Explain what the code does. Limit to 3 GitHub repos in English.",
+    show_tool_calls=True,
+    markdown=True,
+)
+```
+
+### Giphy Agent
+
+```python
+giphy_agent = Agent(
+    name="Giphy Agent",
+    role="Find relevant GIFs",
+    model=OpenAIChat(id="gpt-4o"),
+    tools=[GiphyTools(
+        api_key=os.getenv("GIPHY_API_KEY"),
+        limit=1
+    )],
+    instructions="Find relevant and appropriate GIFs related to the query.",
+    show_tool_calls=True,
+    markdown=True,
+)
+```
+
+### Agno Playground (playground.py)
+
+A local testing interface for debugging agents, monitoring tool calls, and verifying behavior before building the Streamlit UI.
+
+### Streamlit App (app.py)
+
+An interactive chat interface with real-time responses combining text explanations, code examples from GitHub, and a relevant GIF.
+
+---
+
+## Personal Verdict
+
+> "Working with Agno was fun, thanks to its exceptionally well-curated documentation — it made learning both smooth and enjoyable!"
+
+If LangGraph is the framework you should learn deeply, Agno is the framework you'll actually enjoy building with day-to-day.
+
+---
+
+## Resources
+
+- [GitHub Repo](https://github.com/lulu3202/agno_usecase)
+- [Agno Getting Started Cookbook](https://github.com/agno-agi/agno/tree/main/cookbook/getting_started)
+- [Official Agno Documentation](https://docs.agno.com/introduction)
+
+---
+
+*Originally published on [Medium](https://medium.com/@devipriyakaruppiah/agentic-framework-deep-dive-series-part-2-agno-c45da579b7c0).*
