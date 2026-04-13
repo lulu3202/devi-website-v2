@@ -11,6 +11,11 @@ function formatDate(date: Date) {
   return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 }
 
+function readTime(body: string) {
+  const words = body.trim().split(/\s+/).length;
+  return Math.max(1, Math.round(words / 200));
+}
+
 const tagGradients: Record<string, string> = {
   'Claude':        'linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%)',
   'AI Tools':      'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
@@ -22,27 +27,52 @@ const tagGradients: Record<string, string> = {
   'Python':        'linear-gradient(135deg, #3776ab 0%, #ffd343 100%)',
   'Certifications':'linear-gradient(135deg, #f7971e 0%, #ffd200 100%)',
 };
+
+// Build tag counts — only show tags with 2+ posts
+const tagCounts: Record<string, number> = {};
+for (const post of posts) {
+  for (const tag of post.data.tags) {
+    tagCounts[tag] = (tagCounts[tag] ?? 0) + 1;
+  }
+}
+const filterTags = Object.keys(tagCounts)
+  .filter((t) => tagCounts[t] >= 2)
+  .sort((a, b) => a.localeCompare(b));
 ---
 
 <BaseLayout
   title="Blog | Devi Priya K"
-  description="Tutorials, experiments, and deep-dives on AI Visibility, content systems, and GenAI."
+  description="Tutorials, experiments, and deep-dives on agentic AI, GenAI tools, and hands-on projects."
 >
   <div class="page-header">
     <div class="container">
       <h1>Blog</h1>
-      <p>Tutorials, experiments, and deep-dives on AI Visibility, content systems, and GenAI.</p>
+      <p>Tutorials, experiments, and deep-dives on agentic AI, GenAI tools, and hands-on projects.</p>
     </div>
   </div>
 
   <section class="section">
     <div class="container">
-      <div class="blog-grid">
+
+      <!-- Tag filter pills -->
+      <div class="blog-filters" id="blog-filters">
+        <button class="filter-pill active" data-filter="all">All</button>
+        {filterTags.map((tag) => (
+          <button class="filter-pill" data-filter={tag}>{tag}</button>
+        ))}
+      </div>
+
+      <!-- Post count -->
+      <p class="blog-post-count" id="blog-post-count">{posts.length} posts</p>
+
+      <div class="blog-grid" id="blog-grid">
         {posts.map((post) => {
           const firstTag = post.data.tags[0] ?? '';
           const gradient = tagGradients[firstTag] ?? 'linear-gradient(135deg, #FF6B6B 0%, #E85555 100%)';
+          const mins = readTime(post.body);
+          const tagsJson = JSON.stringify(post.data.tags);
           return (
-            <article class="blog-card">
+            <article class="blog-card" data-tags={tagsJson}>
               <a href={`${base}/blog/${post.slug}/`} class="blog-card-cover-link">
                 {post.data.image ? (
                   <img
@@ -60,21 +90,23 @@ const tagGradients: Record<string, string> = {
                 )}
               </a>
               <div class="blog-card-body">
-                <div class="blog-card-meta">
-                  <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
-                  {post.data.tags.length > 0 && (
-                    <div class="blog-card-tags">
-                      {post.data.tags.slice(0, 2).map((tag) => (
-                        <span class="blog-tag">{tag}</span>
-                      ))}
-                    </div>
-                  )}
-                </div>
+                {post.data.tags.length > 0 && (
+                  <div class="blog-card-tags">
+                    {post.data.tags.slice(0, 3).map((tag) => (
+                      <span class="blog-tag">{tag}</span>
+                    ))}
+                  </div>
+                )}
                 <h2 class="blog-card-title">
                   <a href={`${base}/blog/${post.slug}/`}>{post.data.title}</a>
                 </h2>
                 <p class="blog-card-desc">{post.data.description}</p>
-                <a href={`${base}/blog/${post.slug}/`} class="blog-read-link">Read post →</a>
+                <div class="blog-card-footer">
+                  <time datetime={post.data.date.toISOString()} class="blog-card-date">
+                    {formatDate(post.data.date)}
+                  </time>
+                  <span class="blog-card-read">{mins} min read</span>
+                </div>
               </div>
             </article>
           );
@@ -93,3 +125,87 @@ const tagGradients: Record<string, string> = {
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .blog-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .filter-pill {
+    padding: 0.3rem 0.85rem;
+    border-radius: 999px;
+    border: 1px solid var(--color-border, #e2e8f0);
+    background: var(--color-surface-alt, #f8fafc);
+    color: var(--color-text-muted, #64748b);
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+    line-height: 1.4;
+  }
+
+  .filter-pill:hover {
+    background: var(--color-border, #e2e8f0);
+    color: var(--color-text, #1e293b);
+  }
+
+  .filter-pill.active {
+    background: var(--color-text, #1e293b);
+    color: #fff;
+    border-color: var(--color-text, #1e293b);
+  }
+
+  .blog-post-count {
+    font-size: 0.85rem;
+    color: var(--color-text-muted, #64748b);
+    margin-bottom: 2rem;
+  }
+
+  .blog-card-footer {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: auto;
+    padding-top: 0.75rem;
+    font-size: 0.8rem;
+    color: var(--color-text-muted, #64748b);
+  }
+
+  .blog-card-read::before {
+    content: '·';
+    margin-right: 0.5rem;
+  }
+</style>
+
+<script>
+  const pills = document.querySelectorAll<HTMLButtonElement>('.filter-pill');
+  const cards = document.querySelectorAll<HTMLElement>('.blog-card');
+  const countEl = document.getElementById('blog-post-count');
+  const total = cards.length;
+
+  pills.forEach((pill) => {
+    pill.addEventListener('click', () => {
+      const filter = pill.dataset.filter ?? 'all';
+
+      pills.forEach((p) => p.classList.remove('active'));
+      pill.classList.add('active');
+
+      let visible = 0;
+      cards.forEach((card) => {
+        const tags: string[] = JSON.parse(card.dataset.tags ?? '[]');
+        const show = filter === 'all' || tags.includes(filter);
+        card.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+
+      if (countEl) {
+        countEl.textContent = filter === 'all'
+          ? `${total} posts`
+          : `Showing ${visible} of ${total} posts`;
+      }
+    });
+  });
+</script>
