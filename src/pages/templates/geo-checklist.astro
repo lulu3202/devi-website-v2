@@ -1,0 +1,920 @@
+---
+const calcData = [
+  { label: "Direct answer in first 60 words", desc: "Lead with a self-contained 40–80 word answer block", pts: 15 },
+  { label: "H2 headings phrased as questions", desc: "At least 3 of your main headers should be searchable questions", pts: 10 },
+  { label: "FAQ section with 4+ questions", desc: "Each answer 2–3 sentences, specific, citation-ready", pts: 10 },
+  { label: "Comparison table included", desc: "At least one structured table with 3+ rows and 3+ columns", pts: 11 },
+  { label: "1 table or bullet list per ~150 words", desc: "Consistent structured content throughout the post body", pts: 10 },
+  { label: "Author bio with credentials + link", desc: "Verifiable role, past companies, LinkedIn or credential URL", pts: 10 },
+  { label: "External expert citation included", desc: "Named expert or report cited with attribution", pts: 10 },
+  { label: "Statistic with source + year", desc: "Specific number with source name and year", pts: 8 },
+  { label: '"Last Updated" date visible', desc: "Shown at top of post, month + year minimum", pts: 7 },
+  { label: "Internal links to topic cluster", desc: "Links to at least one pillar page and one related post", pts: 9 },
+];
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GEO Optimization Checklist & Template | Devi's Lab</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F5F2EC;
+    --surface: #FDFCF9;
+    --ink: #1A1814;
+    --ink-muted: #5C5648;
+    --accent: #D45C2E;
+    --accent-light: #F2E8E2;
+    --accent2: #2E6B5C;
+    --accent2-light: #E2F0EC;
+    --rule: #DDD8CE;
+    --score-low: #C94F3A;
+    --score-mid: #D4882E;
+    --score-high: #2E6B5C;
+    --mono: 'DM Mono', monospace;
+    --sans: 'DM Sans', sans-serif;
+    --serif: 'DM Serif Display', serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.65;
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  .site-header {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 14px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+  }
+  .site-header .logo { font-size: 14px; font-weight: 500; color: var(--accent); }
+  .site-header .badge {
+    background: var(--accent);
+    color: white;
+    padding: 3px 10px;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 60px 40px 50px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: 'GEO';
+    position: absolute;
+    right: -20px;
+    top: -30px;
+    font-family: var(--serif);
+    font-size: 200px;
+    color: rgba(255,255,255,0.03);
+    pointer-events: none;
+    line-height: 1;
+  }
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 18px;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(32px, 5vw, 52px);
+    line-height: 1.15;
+    max-width: 640px;
+    margin-bottom: 20px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero-desc {
+    color: rgba(245,242,236,0.65);
+    max-width: 520px;
+    font-size: 15px;
+    margin-bottom: 32px;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .hero-meta-item {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: rgba(245,242,236,0.5);
+    letter-spacing: 0.08em;
+  }
+  .hero-meta-item span { color: var(--bg); font-weight: 500; }
+
+  /* LAYOUT */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* TABS */
+  .tabs-nav {
+    background: var(--surface);
+    border-bottom: 1px solid var(--rule);
+    padding: 0 40px;
+    display: flex;
+    gap: 0;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  .tab-btn {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 16px 24px 14px;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--ink-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .tab-btn:hover { color: var(--ink); }
+  .tab-btn.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+
+  .tab-content { display: none; padding: 48px 40px; }
+  .tab-content.active { display: block; }
+
+  /* SECTION HEADERS */
+  .section-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: 28px;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .section-desc {
+    color: var(--ink-muted);
+    font-size: 14px;
+    margin-bottom: 36px;
+    max-width: 540px;
+  }
+
+  /* TECHNIQUE CARDS */
+  .techniques-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+  @media (max-width: 640px) { .techniques-grid { grid-template-columns: 1fr; } }
+
+  .technique-card {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    padding: 22px 24px;
+    position: relative;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    cursor: default;
+  }
+  .technique-card:hover {
+    border-color: var(--accent);
+    box-shadow: 4px 4px 0 var(--accent);
+  }
+  .technique-card .num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .technique-card h3 {
+    font-family: var(--serif);
+    font-size: 17px;
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .technique-card p {
+    font-size: 13px;
+    color: var(--ink-muted);
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+  .technique-card .impact {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    padding: 3px 8px;
+    border-radius: 2px;
+    text-transform: uppercase;
+  }
+  .impact.high { background: var(--accent2-light); color: var(--accent2); }
+  .impact.med { background: #FFF3E0; color: #B06000; }
+  .technique-card .example-box {
+    margin-top: 14px;
+    background: var(--bg);
+    border-left: 2px solid var(--accent);
+    padding: 10px 14px;
+    font-size: 12px;
+    color: var(--ink-muted);
+    font-family: var(--mono);
+    line-height: 1.5;
+  }
+  .technique-card .example-box strong {
+    display: block;
+    color: var(--ink);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+  }
+
+  /* BEFORE / AFTER */
+  .ba-container { margin-bottom: 48px; }
+  .ba-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 24px;
+  }
+  @media (max-width: 640px) { .ba-grid { grid-template-columns: 1fr; } }
+
+  .ba-panel {
+    border: 1px solid var(--rule);
+    background: var(--surface);
+    overflow: hidden;
+  }
+  .ba-panel-header {
+    padding: 12px 20px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .ba-panel.before .ba-panel-header { background: #FEF2F2; color: #9B3A3A; }
+  .ba-panel.after .ba-panel-header { background: var(--accent2-light); color: var(--accent2); }
+  .ba-panel-body { padding: 20px; font-size: 13px; line-height: 1.7; }
+  .ba-panel-body code {
+    font-family: var(--mono);
+    background: var(--bg);
+    padding: 1px 5px;
+    font-size: 12px;
+    color: var(--accent);
+  }
+  .ba-panel-body .field-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-top: 14px;
+    margin-bottom: 4px;
+    display: block;
+  }
+  .ba-panel-body .field-value {
+    color: var(--ink);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .ba-panel.after .field-value { color: var(--ink); }
+
+  .geo-score-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 4px 12px;
+    border-radius: 2px;
+    margin-top: 16px;
+  }
+  .score-low { background: #FEF2F2; color: var(--score-low); }
+  .score-high { background: var(--accent2-light); color: var(--accent2); }
+  .score-circle {
+    width: 8px; height: 8px; border-radius: 50%;
+  }
+  .score-low .score-circle { background: var(--score-low); }
+  .score-high .score-circle { background: var(--score-high); }
+
+  /* CITATION EXAMPLE */
+  .citation-box {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 24px 28px;
+    margin: 24px 0;
+    position: relative;
+  }
+  .citation-box::before {
+    content: 'PERPLEXITY CITATION SIMULATION';
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 14px;
+  }
+  .citation-box .cited-text {
+    font-size: 14px;
+    line-height: 1.7;
+    color: rgba(245,242,236,0.85);
+    margin-bottom: 16px;
+  }
+  .citation-box .cite-source {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: rgba(245,242,236,0.4);
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 12px;
+  }
+  .citation-box .cite-source span { color: var(--accent); }
+
+  /* SCORE CALCULATOR */
+  .calculator {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    padding: 32px;
+    margin-top: 8px;
+  }
+  .calc-items { margin: 24px 0; }
+  .calc-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .calc-item:last-child { border-bottom: none; }
+  .calc-checkbox {
+    width: 20px; height: 20px;
+    border: 1.5px solid var(--rule);
+    border-radius: 2px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+    transition: all 0.15s;
+    background: white;
+  }
+  .calc-checkbox.checked {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .calc-checkbox.checked::after {
+    content: '✓';
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .calc-item-text { flex: 1; }
+  .calc-item-label {
+    font-size: 14px;
+    color: var(--ink);
+    margin-bottom: 2px;
+    cursor: pointer;
+  }
+  .calc-item-desc { font-size: 12px; color: var(--ink-muted); }
+  .calc-item-pts {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-muted);
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+  .calc-item-pts.earned { color: var(--accent2); font-weight: 500; }
+
+  .score-display {
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 2px solid var(--ink);
+  }
+  .score-number {
+    font-family: var(--serif);
+    font-size: 64px;
+    line-height: 1;
+    margin-bottom: 4px;
+    transition: color 0.3s;
+  }
+  .score-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 16px;
+  }
+  .score-bar-track {
+    height: 6px;
+    background: var(--rule);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+  .score-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s;
+    width: 0%;
+  }
+  .score-verdict {
+    font-size: 13px;
+    color: var(--ink-muted);
+    font-style: italic;
+  }
+  .score-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    border: 1.5px solid var(--ink);
+    background: none;
+    cursor: pointer;
+    transition: all 0.15s;
+    color: var(--ink);
+  }
+  .btn:hover { background: var(--ink); color: var(--bg); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: white; }
+  .btn.primary:hover { background: #B84E24; border-color: #B84E24; }
+
+  /* TEMPLATE SECTION */
+  .template-block {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .template-block-header {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+  }
+  .template-block-header .req {
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+  }
+  .template-block-body { padding: 20px 24px; }
+  .template-field {
+    background: var(--bg);
+    border: 1px dashed var(--rule);
+    padding: 12px 16px;
+    font-size: 13px;
+    color: var(--ink-muted);
+    font-family: var(--mono);
+    margin-bottom: 10px;
+    line-height: 1.6;
+    cursor: text;
+    transition: border-color 0.2s;
+  }
+  .template-field:hover { border-color: var(--accent); color: var(--ink); }
+  .template-field .placeholder { color: #B5AFA7; font-style: italic; }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink);
+    color: rgba(245,242,236,0.5);
+    padding: 32px 40px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: gap;
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+
+  /* DIVIDER */
+  .divider { border: none; border-top: 1px solid var(--rule); margin: 40px 0; }
+
+  /* PRINT */
+  @media print {
+    .tabs-nav, .site-header { display: none; }
+    .tab-content { display: block !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <span class="logo">Devi's Lab</span>
+  <span style="opacity:0.4">devislabai.com</span>
+  <span class="badge">Free Resource</span>
+</header>
+
+<div class="hero">
+  <div class="hero-eyebrow">Resource Template · GEO Series</div>
+  <h1>The GEO Optimization<br><em>Checklist & Template</em></h1>
+  <p class="hero-desc">10 techniques to make your blog citable by ChatGPT, Perplexity, and Google SGE. Includes a before/after LinkedIn example and interactive GEO score calculator (out of 100).</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item">By <span>Devi Priya K</span></div>
+    <div class="hero-meta-item">Updated <span>May 2026</span></div>
+    <div class="hero-meta-item">Format <span>Interactive Checklist</span></div>
+    <div class="hero-meta-item">Time to complete <span>~20 min per post</span></div>
+  </div>
+</div>
+
+<nav class="tabs-nav">
+  <button class="tab-btn active" onclick="switchTab('techniques', this)">10 Techniques</button>
+  <button class="tab-btn" onclick="switchTab('beforeafter', this)">Before / After</button>
+  <button class="tab-btn" onclick="switchTab('calculator', this)">GEO Score</button>
+</nav>
+
+<!-- TAB 1: TECHNIQUES -->
+<div id="tab-techniques" class="tab-content active">
+  <div class="section-label">The ACS Framework · 10 Techniques</div>
+  <div class="section-title">Make Any Post AI-Citable</div>
+  <p class="section-desc">Each technique maps to one of three pillars: Answerability, Clarity, or Signal. Apply all 10 for maximum citation potential.</p>
+
+  <div class="techniques-grid">
+
+    <div class="technique-card">
+      <span class="num">01 · ANSWERABILITY</span>
+      <h3>Direct Answer Block</h3>
+      <p>Lead with a 40–80 word summary that directly answers the post's core question. AI engines scan for this first.</p>
+      <span class="impact high">High Impact</span>
+      <div class="example-box">
+        <strong>Format</strong>
+        <strong>Quick Answer:</strong> [Topic] is [definition]. The best approach is [X] because [Y]. Start with [Z].
+      </div>
+    </div>
+
+    <div class="technique-card">
+      <span class="num">02 · ANSWERABILITY</span>
+      <h3>Question-Phrased H2 Headers</h3>
+      <p>Rewrite all H2s as questions that match how people actually search. AI engines match queries to question headers directly.</p>
+      <span class="impact high">High Impact</span>
+      <div class="example-box">
+        <strong>Before → After</strong>
+        "CRM Options" → "What Is the Best CRM for Startups in 2026?"
+      </div>
+    </div>
+
+    <div class="technique-card">
+      <span class="num">03 · ANSWERABILITY</span>
+      <h3>FAQ Section</h3>
+      <p>Add 4–6 questions your reader would actually ask. Each answer should be 2–3 sentences, self-contained, and citation-ready.</p>
+      <span class="impact high">High Impact</span>
+      <div class="example-box">
+        <strong>Structure</strong>
+        Q: [Specific question]
+        A: [Direct 2–3 sentence answer with a specific detail or number]
+      </div>
+    </div>
+
+    <div class="technique-card">
+      <span class="num">04 · CLARITY</span>
+      <h3>Comparison Tables</h3>
+      <p>One structured table per major comparison. Tables are the most-cited format in AI answers — they give engines clean, structured data to surface.</p>
+      <span class="impact high">High Impact</span>
+      <div class="example-box">
+        <strong>Minimum columns</strong>
+        Tool | Price | Best For | Key Limitation
+      </div>
+    </div>
+
+    <div class="technique-card">
+      <span class="num">05 · CLARITY</span>
+      <h3>Bullet-Point Summaries</h3>
+      <p>After every major section, add a 3–5 point summary. Keep each bullet under 20 words. These get lifted directly into AI responses.</p>
+      <span class="impact med">Med Impact</span>
+      <div class="example-box">
+        <strong>Use for</strong>
+        Key takeaways, step lists, feature comparisons, pros/cons
+      </div>
+    </div>
+
+    <div class="technique-card">
+      <span class="num">06 · CLARITY</span>
+      <h3>Named Mini-Frameworks</h3>
+      <p>Give your core idea a name. "The ACS Framework" is more citable than "my approach." Named frameworks get attributed and repeated.</p>
+      <span class="impact high">High Impact</span>
+      <div class="example-box">
+        <strong>Pattern</strong>
+        [Acronym] = [3 pillars]. E.g., ACS = Answerability, Clarity, Signal.
+      </div>
+    </div>
+
+    <div class="technique-card">
+      <span class="num">07 · SIGNAL</span>
+      <h3>Authoritative Quotes & Citations</h3>
+      <p>Cite 1–2 external experts by name and link. AI engines use external citations as a trust signal — it shows your post is part of a larger conversation.</p>
+      <span class="impact med">Med Impact</span>
+      <div class="example-box">
+        <strong>Format</strong>
+        Per [Expert Name] ([Source]): "[paraphrased claim with attribution]."
+      </div>
+    </div>
+
+    <div class="technique-card">
+      <span class="num">08 · SIGNAL</span>
+      <h3>Statistics With Sources</h3>
+      <p>Include 2–3 specific statistics with clear attribution. Numbers get cited far more than vague claims. "73% of startups" beats "many startups."</p>
+      <span class="impact med">Med Impact</span>
+      <div class="example-box">
+        <strong>Format</strong>
+        [Stat] — [Source], [Year]. E.g., "73% of SMBs use CRM — Salesforce State of Sales, 2025."
+      </div>
+    </div>
+
+    <div class="technique-card">
+      <span class="num">09 · SIGNAL</span>
+      <h3>Author Bio + Credentials</h3>
+      <p>Every post needs a byline with verifiable credentials. AI engines use author authority to decide whether to cite content. Link to LinkedIn or published work.</p>
+      <span class="impact high">High Impact</span>
+      <div class="example-box">
+        <strong>Format</strong>
+        By [Name], [Role] (ex-[Company]). [Credential 1], [Credential 2]. [LinkedIn link]
+      </div>
+    </div>
+
+    <div class="technique-card">
+      <span class="num">10 · SIGNAL</span>
+      <h3>Topic Cluster + Internal Links</h3>
+      <p>Link every post to a pillar page and at least one related satellite post. Topic clusters signal topical authority to both search engines and AI crawlers.</p>
+      <span class="impact med">Med Impact</span>
+      <div class="example-box">
+        <strong>Structure</strong>
+        Pillar: "What Is GEO?" → Satellite: "GEO Checklist" → Satellite: "ACS Framework"
+      </div>
+    </div>
+
+  </div>
+
+  <div style="background:var(--accent-light); border-left: 3px solid var(--accent); padding: 20px 24px; font-size:13px; color: var(--ink-muted);">
+    <strong style="display:block; font-family:var(--mono); font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); margin-bottom:8px;">Quick Start Rule</strong>
+    Apply techniques 01, 02, 03, and 04 first. These four have the highest citation impact and take under 30 minutes per post. Add 05–10 in a second pass.
+  </div>
+</div>
+
+<!-- TAB 2: BEFORE / AFTER -->
+<div id="tab-beforeafter" class="tab-content">
+  <div class="section-label">Case Study · LinkedIn Personal Brand</div>
+  <div class="section-title">Before & After GEO Optimization</div>
+  <p class="section-desc">The same blog post topic — "How to Build a LinkedIn Personal Brand" — optimized using the ACS framework. See exactly what changes and why it gets cited.</p>
+
+  <div class="ba-container">
+    <div class="ba-grid">
+
+      <div class="ba-panel before">
+        <div class="ba-panel-header">❌ Before: Not GEO-Optimized</div>
+        <div class="ba-panel-body">
+          <span class="field-label">Title</span>
+          <div class="field-value">How I Built My LinkedIn Personal Brand</div>
+
+          <span class="field-label">Opening</span>
+          <div class="field-value">LinkedIn is important. Here's what I did over 3 months. I posted often, connected with people, and shared tips whenever I could...</div>
+
+          <span class="field-label">Structure</span>
+          <div class="field-value">Long narrative paragraphs. No clear steps. No posting calendar table. No FAQ. No author bio. No stats cited.</div>
+
+          <span class="field-label">Schema</span>
+          <div class="field-value">None added. No FAQPage, no HowTo markup.</div>
+
+          <span class="field-label">Authority signals</span>
+          <div class="field-value">No byline. No credentials. No external citations. No "Last Updated" date.</div>
+
+          <div class="geo-score-badge score-low">
+            <span class="score-circle"></span>
+            GEO Score: 12 / 100
+          </div>
+        </div>
+      </div>
+
+      <div class="ba-panel after">
+        <div class="ba-panel-header">✓ After: ACS Optimized</div>
+        <div class="ba-panel-body">
+          <span class="field-label">Title</span>
+          <div class="field-value">How to Build a Personal Brand on LinkedIn in 30 Days (Step-by-Step 2026)</div>
+
+          <span class="field-label">Quick Answer (first 60 words)</span>
+          <div class="field-value">Post 3x/week, optimize your headline with keywords, engage with 10 posts daily, and share one original insight per week. Start with a clear niche (AI, marketing, or tech). Most people see traction in <code>4–6 weeks</code> with consistent effort.</div>
+
+          <span class="field-label">Structure</span>
+          <div class="field-value">H2s as questions. 30-day posting calendar table (4 rows × 4 columns). Bullet list for best posting times. FAQ with 3 self-contained answers. Internal links to topic cluster.</div>
+
+          <span class="field-label">Schema</span>
+          <div class="field-value">FAQPage JSON-LD added. "Last Updated: April 2026" visible at top of post.</div>
+
+          <span class="field-label">Authority signals</span>
+          <div class="field-value">Author bio: "By Devi Priya Karuppiah, Senior TPM (ex-Microsoft, ex-Deloitte). 10+ AI certifications." Stat: "40% less engagement on weekends." External citation included.</div>
+
+          <div class="geo-score-badge score-high">
+            <span class="score-circle"></span>
+            GEO Score: 87 / 100
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section-label">Perplexity Citation Simulation</div>
+  <div class="section-title">What Gets Cited and Why</div>
+  <p class="section-desc">This is what an AI-generated answer looks like when it pulls from the optimized post.</p>
+
+  <div class="citation-box">
+    <div class="cited-text">
+      To build a personal brand on LinkedIn in 30 days: post <strong>3x/week</strong> (Tuesday, Wednesday, Thursday at 8–10 AM), optimize your headline with role-specific keywords, and engage with 10 posts in your niche daily. Start with one clear topic — AI, marketing, or tech. Most creators grow from 0 to 1,000 followers in 60 days using this approach. Weekends see approximately 40% less engagement.
+    </div>
+    <div class="cite-source">
+      Sources: <span>devislabai.com · "LinkedIn Personal Brand in 30 Days"</span> &nbsp;·&nbsp; McKinsey AI Search Report, 2025
+    </div>
+  </div>
+
+  <div style="margin-top:16px; display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px;">
+    <div style="background:var(--surface); border:1px solid var(--rule); padding:16px 18px;">
+      <div style="font-family:var(--mono); font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); margin-bottom:8px;">What got cited</div>
+      <div style="font-size:13px; color:var(--ink-muted); line-height:1.6;">The 60-word Quick Answer block — specific days, times, and follower growth number made it self-contained and verifiable.</div>
+    </div>
+    <div style="background:var(--surface); border:1px solid var(--rule); padding:16px 18px;">
+      <div style="font-family:var(--mono); font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); margin-bottom:8px;">Why it was cited</div>
+      <div style="font-size:13px; color:var(--ink-muted); line-height:1.6;">Concrete numbers (3x/week, 10 posts, 60 days, 40%) give AI engines structured, verifiable data to surface.</div>
+    </div>
+    <div style="background:var(--surface); border:1px solid var(--rule); padding:16px 18px;">
+      <div style="font-family:var(--mono); font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); margin-bottom:8px;">What amplified it</div>
+      <div style="font-size:13px; color:var(--ink-muted); line-height:1.6;">The 30-day calendar table — structured rows with weekly goals — is a second discrete citation asset AI engines can pull independently.</div>
+    </div>
+  </div>
+</div>
+
+<!-- TAB 3: GEO SCORE CALCULATOR -->
+<div id="tab-calculator" class="tab-content">
+  <div class="section-label">Interactive Tool</div>
+  <div class="section-title">GEO Score Calculator</div>
+  <p class="section-desc">Check off each element present in your post. Your GEO score updates in real time. Aim for 70+ before publishing.</p>
+
+  <div class="calculator">
+    <div class="calc-items">
+      {calcData.map((item, i) => (
+        <div class="calc-item" data-index={i} data-pts={item.pts}>
+          <div class="calc-checkbox" id={`cb-${i}`}></div>
+          <div class="calc-item-text">
+            <div class="calc-item-label">{item.label}</div>
+            <div class="calc-item-desc">{item.desc}</div>
+          </div>
+          <div class="calc-item-pts" id={`pts-${i}`}>+{item.pts}</div>
+        </div>
+      ))}
+    </div>
+
+    <div class="score-display">
+      <div class="score-number" id="scoreNum" style="color:var(--score-low)">0</div>
+      <div class="score-label">GEO Score / 100</div>
+      <div class="score-bar-track">
+        <div class="score-bar-fill" id="scoreBar"></div>
+      </div>
+      <div class="score-verdict" id="scoreVerdict">Check items above to calculate your score.</div>
+
+      <div class="score-actions">
+        <button class="btn primary" onclick="copyResults()">Copy Score Report</button>
+        <button class="btn" onclick="resetCalc()">Reset</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div>© 2026 Devi Priya K · <a href="https://devislabai.com">devislabai.com</a></div>
+  <div>Part of the GEO Series · <a href="https://devislabai.com/templates">All Templates →</a></div>
+</footer>
+
+<script is:inline>
+  var calcItems = Array.from(document.querySelectorAll('.calc-item'));
+  var checked = calcItems.map(function() { return false; });
+
+  calcItems.forEach(function(item, i) {
+    item.querySelector('.calc-checkbox').addEventListener('click', function() { toggleCheck(i); });
+    item.querySelector('.calc-item-label').addEventListener('click', function() { toggleCheck(i); });
+  });
+
+  function toggleCheck(i) {
+    checked[i] = !checked[i];
+    document.getElementById('cb-' + i).className = 'calc-checkbox' + (checked[i] ? ' checked' : '');
+    document.getElementById('pts-' + i).className = 'calc-item-pts' + (checked[i] ? ' earned' : '');
+    updateScore();
+  }
+
+  function updateScore() {
+    var score = calcItems.reduce(function(sum, item, i) {
+      return sum + (checked[i] ? parseInt(item.dataset.pts, 10) : 0);
+    }, 0);
+    var el = document.getElementById('scoreNum');
+    var bar = document.getElementById('scoreBar');
+    var verdict = document.getElementById('scoreVerdict');
+    var color, bg, verdictText;
+    if (score === 0) {
+      color = 'var(--ink-muted)'; bg = 'var(--rule)';
+      verdictText = 'Check items above to calculate your score.';
+    } else if (score < 44) {
+      color = 'var(--score-low)'; bg = 'var(--score-low)';
+      verdictText = 'Not AI-citable yet. Focus on items 1–4 first — they account for 46 points.';
+    } else if (score < 77) {
+      color = 'var(--score-mid)'; bg = 'var(--score-mid)';
+      verdictText = 'Partially optimized. Add FAQ schema and author bio to cross the 70% threshold.';
+    } else if (score < 100) {
+      color = 'var(--score-high)'; bg = 'var(--score-high)';
+      verdictText = 'Good — this post is AI-citable. Test it in Perplexity and ChatGPT within 2 weeks.';
+    } else {
+      color = 'var(--score-high)'; bg = 'var(--score-high)';
+      verdictText = 'Excellent. This post is fully GEO-optimized. Monitor citations monthly.';
+    }
+    el.textContent = score;
+    el.style.color = color;
+    bar.style.width = score + '%';
+    bar.style.background = bg;
+    verdict.textContent = verdictText;
+  }
+
+  function resetCalc() {
+    checked = calcItems.map(function() { return false; });
+    calcItems.forEach(function(_, i) {
+      document.getElementById('cb-' + i).className = 'calc-checkbox';
+      document.getElementById('pts-' + i).className = 'calc-item-pts';
+    });
+    updateScore();
+  }
+
+  function copyResults() {
+    var score = calcItems.reduce(function(sum, item, i) {
+      return sum + (checked[i] ? parseInt(item.dataset.pts, 10) : 0);
+    }, 0);
+    var lines = ['GEO Score Report — devislabai.com', 'Score: ' + score + '/100', '', 'Completed:'];
+    calcItems.forEach(function(item, i) {
+      var label = item.querySelector('.calc-item-label').textContent;
+      var pts = item.dataset.pts;
+      if (checked[i]) lines.push('✓ ' + label + ' (+' + pts + ')');
+    });
+    lines.push('', 'Missing:');
+    calcItems.forEach(function(item, i) {
+      var label = item.querySelector('.calc-item-label').textContent;
+      var pts = item.dataset.pts;
+      if (!checked[i]) lines.push('○ ' + label + ' (+' + pts + ')');
+    });
+    navigator.clipboard.writeText(lines.join('\n')).then(function() {
+      alert('Score report copied to clipboard!');
+    });
+  }
+
+  function switchTab(name, btn) {
+    document.querySelectorAll('.tab-content').forEach(function(t) { t.classList.remove('active'); });
+    document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+    document.getElementById('tab-' + name).classList.add('active');
+    if (btn) btn.classList.add('active');
+  }
+
+  updateScore();
+</script>
+</body>
+</html>
