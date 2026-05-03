@@ -65,6 +65,21 @@ const filterTags = Object.keys(tagCounts)
       <!-- Post count -->
       <p class="blog-post-count" id="blog-post-count">{posts.length} posts</p>
 
+      <!-- Featured external post -->
+      <div class="featured-post">
+        <div class="featured-post-eyebrow">
+          <span class="featured-badge">Latest</span>
+          <span class="featured-meta">GEO &middot; AI Search &middot; May 2026</span>
+        </div>
+        <h2 class="featured-post-title">Getting Started with GEO: A Guide for Bloggers</h2>
+        <p class="featured-post-desc">GEO is how you structure content so AI engines like ChatGPT and Perplexity cite it in their answers — even when users never visit your site. Covers the ACS Framework with a before/after example and 5-step action plan.</p>
+        <div class="featured-post-links">
+          <a href="https://medium.com/@devipriyakaruppiah/getting-started-with-generative-engine-optimization-geo-a-guide-for-bloggers-79c5b2c9d0d0" target="_blank" rel="noopener" class="featured-link featured-link-primary">Read on Medium →</a>
+          <a href="https://youtu.be/d3zFGKVebGg" target="_blank" rel="noopener" class="featured-link">Watch on YouTube →</a>
+          <a href="https://devislabai.com/templates/" target="_blank" rel="noopener" class="featured-link">Free template →</a>
+        </div>
+      </div>
+
       <div class="blog-grid" id="blog-grid">
         {posts.map((post) => {
           const firstTag = post.data.tags[0] ?? '';
@@ -177,6 +192,79 @@ const filterTags = Object.keys(tagCounts)
   .blog-card-read::before {
     content: '·';
     margin-right: 0.5rem;
+  }
+
+  .featured-post {
+    border: 1px solid var(--color-border, #e2e8f0);
+    border-left: 3px solid var(--color-text, #1e293b);
+    background: var(--color-surface-alt, #f8fafc);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .featured-post-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .featured-badge {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--color-text, #1e293b);
+    color: #fff;
+    padding: 0.2rem 0.55rem;
+    border-radius: 2px;
+  }
+
+  .featured-meta {
+    font-size: 0.78rem;
+    color: var(--color-text-muted, #64748b);
+  }
+
+  .featured-post-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+    line-height: 1.35;
+    color: var(--color-text, #1e293b);
+  }
+
+  .featured-post-desc {
+    font-size: 0.88rem;
+    color: var(--color-text-muted, #64748b);
+    line-height: 1.65;
+    margin: 0 0 1rem;
+    max-width: 68ch;
+  }
+
+  .featured-post-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+  }
+
+  .featured-link {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--color-text-muted, #64748b);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-border, #e2e8f0);
+    padding-bottom: 1px;
+    transition: color 0.15s, border-color 0.15s;
+  }
+
+  .featured-link:hover {
+    color: var(--color-text, #1e293b);
+    border-color: var(--color-text, #1e293b);
+  }
+
+  .featured-link-primary {
+    color: var(--color-text, #1e293b);
+    border-color: var(--color-text, #1e293b);
   }
 </style>
 
