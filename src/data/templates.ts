@@ -7,7 +7,6 @@ export interface Template {
   prdPromptUrl: string; // set to '' until ready
   tutorialUrl: string;  // set to '' until ready
   youtubeVideoId: string; // set to '' until ready
-  beehiivUrl: string;   // set to '' until ready
 }
 
 export const templates: Template[] = [
@@ -20,6 +19,5 @@ export const templates: Template[] = [
     prdPromptUrl: '',
     tutorialUrl: '',
     youtubeVideoId: '',
-    beehiivUrl: '',
   },
 ];
