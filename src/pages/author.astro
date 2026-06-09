@@ -1,0 +1,335 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<BaseLayout
+  title="Author | Devi Priya Karuppiah"
+  description="The Legend of Meenakshi — a reimagining of one of South India's most sacred stories for a new generation of readers. By Devi Priya Karuppiah."
+  ogImage="images/meenakshi-cover.jpg"
+>
+
+  <!-- Hero: Book Cover + Hook -->
+  <section class="author-hero">
+    <div class="container">
+      <div class="author-hero-inner">
+
+        <div class="author-cover-wrap">
+          <img
+            src={`${base}/images/meenakshi-cover.jpg`}
+            alt="The Legend of Meenakshi — book cover"
+            class="author-cover"
+            width="340"
+            height="544"
+            loading="eager"
+          />
+        </div>
+
+        <div class="author-hero-text">
+          <span class="author-label">Author</span>
+          <h1 class="author-hook">
+            Before she was worshipped as a goddess, she ruled as a queen.
+          </h1>
+          <h2 class="author-book-title">The Legend of Meenakshi</h2>
+          <p class="author-subtitle">Retold for the Modern Reader</p>
+
+          <div class="author-buy-btns">
+            <a
+              href="https://www.amazon.com/dp/B0H4M6DTHF"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-primary"
+            >
+              Buy on Amazon.com
+            </a>
+            <a
+              href="https://www.amazon.in/dp/B0H42J2PV1/ref=sr_1_1?crid=2VP3K06IJPCK&dib=eyJ2IjoiMSJ9.KTxKs3x2XfeMsp0C3AiynwI7laX1vNLmk-RY6eFZul4d_MIlFDf4C9p4CwwmATZmd7RYTWGHl76pYrjtu5fXqNfkLtBZ9q46c5YsPmcaevs.DsZr49g9YefIkGAh53cPIzs8CRzmYPxjBHtexRcnOw8&dib_tag=se&keywords=The+legend+of+Meenakshi&qid=1781021057&sprefix=the+legend+of+meenakshi%2Caps%2C240&sr=8-1"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-outline"
+            >
+              Buy on Amazon.in
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Book Description -->
+  <section class="section">
+    <div class="container">
+      <div class="author-content">
+
+        <div class="author-description">
+          <div class="section-header" style="text-align: left; margin-bottom: 2rem;">
+            <h2>About the Book</h2>
+          </div>
+          <div class="author-desc-body">
+            <p><strong>Madurai. The Temple City.</strong></p>
+            <p>
+              Meenakshi. Heiress to the Pandyan throne. Warrior queen destined to become
+              the beloved goddess-queen of Madurai.
+            </p>
+            <p>This is the story of how Madurai came to be. How a city built on devotion was chosen by Shiva himself.</p>
+            <p>
+              Born beneath prophecy and raised to rule, Meenakshi refused to fit the mold
+              despite the weight of expectation and tradition. She never lowered her standards.
+              And she won.
+            </p>
+            <p>
+              From the founding of Madurai and the rise of a warrior queen to her journey across the world,
+              her meeting with Sundareshwara, and the divine wedding that would shape a civilization,
+              this is a story of courage, devotion, destiny, and a love powerful enough to transcend
+              heaven and earth.
+            </p>
+            <p class="author-inspired">
+              Inspired by the <em>Thiruvilaiyadal Puranam</em>, <strong>The Legend of Meenakshi</strong>
+              reimagines one of South India's most sacred stories for a new generation of readers.
+            </p>
+          </div>
+        </div>
+
+        <!-- Royalty Donation -->
+        <aside class="author-cause">
+          <div class="cause-card">
+            <div class="cause-icon">🪔</div>
+            <h3 class="cause-title">Born in Madurai. Gives back to Madurai.</h3>
+            <p class="cause-body">
+              All author royalties from <strong>The Legend of Meenakshi</strong> go directly to
+              <a href="https://www.vidiyal-children.org/" target="_blank" rel="noopener noreferrer" style="color: var(--color-coral); font-weight: 700;">Sakthi Vidiyal</a>, a Madurai-based NGO.
+              This book was born in Madurai. It gives back to Madurai.
+            </p>
+            <div class="author-buy-btns author-buy-btns--stacked">
+              <a
+                href="https://www.amazon.com/dp/B0H4M6DTHF"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-primary"
+              >
+                Buy on Amazon.com
+              </a>
+              <a
+                href="https://www.amazon.in/dp/B0H42J2PV1/ref=sr_1_1?crid=2VP3K06IJPCK&dib=eyJ2IjoiMSJ9.KTxKs3x2XfeMsp0C3AiynwI7laX1vNLmk-RY6eFZul4d_MIlFDf4C9p4CwwmATZmd7RYTWGHl76pYrjtu5fXqNfkLtBZ9q46c5YsPmcaevs.DsZr49g9YefIkGAh53cPIzs8CRzmYPxjBHtexRcnOw8&dib_tag=se&keywords=The+legend+of+Meenakshi&qid=1781021057&sprefix=the+legend+of+meenakshi%2Caps%2C240&sr=8-1"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-outline"
+              >
+                Buy on Amazon.in
+              </a>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  /* ── Author Hero ── */
+  .author-hero {
+    background: linear-gradient(160deg, #FFF7F5 0%, #FFF3F0 40%, #FAFAFA 100%);
+    padding: calc(var(--section-gap) * 1.1) 0;
+  }
+
+  .author-hero-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+    text-align: center;
+  }
+
+  /* Book cover */
+  .author-cover-wrap {
+    flex-shrink: 0;
+  }
+
+  .author-cover {
+    width: 260px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow:
+      0 4px 6px rgba(0,0,0,0.07),
+      0 20px 48px rgba(0, 0, 0, 0.22),
+      0 0 0 1px rgba(0,0,0,0.06);
+    display: block;
+    margin: 0 auto;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .author-cover:hover {
+    transform: translateY(-4px) rotate(1deg);
+    box-shadow:
+      0 8px 12px rgba(0,0,0,0.1),
+      0 32px 64px rgba(0, 0, 0, 0.28);
+  }
+
+  /* Hero text */
+  .author-label {
+    display: inline-block;
+    background: var(--color-coral-light);
+    color: var(--color-coral);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.9rem;
+    border-radius: 100px;
+    margin-bottom: 1.25rem;
+  }
+
+  .author-hook {
+    font-size: clamp(1.6rem, 4vw, 2.6rem);
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--color-text);
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+    max-width: 600px;
+  }
+
+  .author-book-title {
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    font-weight: 700;
+    color: var(--color-coral);
+    margin-bottom: 0.25rem;
+  }
+
+  .author-subtitle {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    margin-bottom: 2rem;
+    font-style: italic;
+  }
+
+  /* Buy buttons */
+  .author-buy-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    justify-content: center;
+  }
+
+  /* ── Content section ── */
+  .author-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .author-desc-body p {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: var(--color-text-muted);
+    margin-bottom: 1.1rem;
+  }
+
+  .author-desc-body p:first-child {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .author-desc-body strong {
+    color: var(--color-text);
+    font-weight: 700;
+  }
+
+  .author-inspired {
+    border-left: 3px solid var(--color-coral);
+    padding-left: 1rem;
+    font-size: 1rem !important;
+    color: var(--color-text) !important;
+    background: var(--color-coral-light);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 0.75rem 1.25rem !important;
+    margin-top: 1.5rem;
+  }
+
+  /* Cause card */
+  .cause-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 2rem;
+    text-align: center;
+    box-shadow: var(--shadow-card);
+    position: sticky;
+    top: calc(var(--nav-height) + 1.5rem);
+  }
+
+  .cause-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .cause-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 1rem;
+    line-height: 1.35;
+  }
+
+  .cause-body {
+    font-size: 0.97rem;
+    color: var(--color-text-muted);
+    line-height: 1.75;
+    margin-bottom: 1.75rem;
+  }
+
+  .cause-body strong {
+    color: var(--color-text);
+    font-weight: 700;
+  }
+
+  .author-buy-btns--stacked {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .author-buy-btns--stacked .btn {
+    justify-content: center;
+  }
+
+  /* ── Responsive ── */
+  @media (min-width: 768px) {
+    .author-hero-inner {
+      flex-direction: row;
+      align-items: flex-start;
+      text-align: left;
+      gap: 3.5rem;
+    }
+
+    .author-cover {
+      width: 300px;
+      margin: 0;
+    }
+
+    .author-hook {
+      max-width: 520px;
+    }
+
+    .author-buy-btns {
+      justify-content: flex-start;
+    }
+
+    .author-content {
+      grid-template-columns: 1fr 320px;
+      gap: 3rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .author-cover {
+      width: 340px;
+    }
+  }
+</style>
