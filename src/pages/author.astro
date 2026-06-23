@@ -34,23 +34,74 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
           <h2 class="author-book-title">The Legend of Meenakshi</h2>
           <p class="author-subtitle">Retold for the Modern Reader</p>
 
-          <div class="author-buy-btns">
+          <div class="buy-cards" id="buy">
             <a
               href="https://www.amazon.com/dp/B0H4M6DTHF"
               target="_blank"
               rel="noopener noreferrer"
-              class="btn btn-primary"
+              class="buy-card buy-card--amazon-com"
             >
-              Buy on Amazon.com
+              <span class="buy-card-icon">
+                <svg viewBox="0 0 48 48" width="26" height="26" aria-hidden="true">
+                  <text x="24" y="31" text-anchor="middle" font-family="Georgia, serif" font-size="26" font-weight="700" fill="#fff">a</text>
+                  <path d="M10 36 Q24 44 38 36" stroke="#FF9900" stroke-width="3" fill="none" stroke-linecap="round"/>
+                  <path d="M34 33 L39 36 L35 39" stroke="#FF9900" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span class="buy-card-title">Buy on Amazon.com</span>
+              <span class="buy-card-sub">Paperback &amp; eBook<br />(International)</span>
+              <span class="buy-card-cta buy-card-cta--dark">View on Amazon.com →</span>
             </a>
+
             <a
               href="https://www.amazon.in/dp/B0H42J2PV1/ref=sr_1_1?crid=2VP3K06IJPCK&dib=eyJ2IjoiMSJ9.KTxKs3x2XfeMsp0C3AiynwI7laX1vNLmk-RY6eFZul4d_MIlFDf4C9p4CwwmATZmd7RYTWGHl76pYrjtu5fXqNfkLtBZ9q46c5YsPmcaevs.DsZr49g9YefIkGAh53cPIzs8CRzmYPxjBHtexRcnOw8&dib_tag=se&keywords=The+legend+of+Meenakshi&qid=1781021057&sprefix=the+legend+of+meenakshi%2Caps%2C240&sr=8-1"
               target="_blank"
               rel="noopener noreferrer"
-              class="btn btn-outline"
+              class="buy-card buy-card--amazon-in"
             >
-              Buy on Amazon.in
+              <span class="buy-card-icon">
+                <svg viewBox="0 0 48 48" width="26" height="26" aria-hidden="true">
+                  <text x="24" y="31" text-anchor="middle" font-family="Georgia, serif" font-size="26" font-weight="700" fill="#fff">a</text>
+                  <path d="M10 36 Q24 44 38 36" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>
+                  <path d="M34 33 L39 36 L35 39" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span class="buy-card-title">Buy eBook on Amazon.in</span>
+              <span class="buy-card-sub">eBook Edition<br />(India)</span>
+              <span class="buy-card-cta buy-card-cta--coral">View on Amazon.in →</span>
             </a>
+
+            <a
+              href="https://store.pothi.com/book/devi-priya-karuppiah-legend-meenakshi/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="buy-card buy-card--pothi"
+            >
+              <span class="buy-card-icon">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2 5c2-1.2 4.6-1.5 7-.6v13.6c-2.4-.9-5-.6-7 .6V5z"/>
+                  <path d="M22 5c-2-1.2-4.6-1.5-7-.6v13.6c2.4-.9 5-.6 7 .6V5z"/>
+                </svg>
+              </span>
+              <span class="buy-card-title">Buy Paperback on Pothi</span>
+              <span class="buy-card-sub">Paperback Edition<br />(India)</span>
+              <span class="buy-card-cta buy-card-cta--green">View on Pothi.com →</span>
+            </a>
+          </div>
+
+          <div class="buy-trust-strip">
+            <span class="trust-item">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>
+              Secure Payments
+            </span>
+            <span class="trust-item">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>
+              Reliable Delivery
+            </span>
+            <span class="trust-item">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.5 4 5.7 4 9s-1.5 6.5-4 9c-2.5-2.5-4-5.7-4-9s1.5-6.5 4-9z"/></svg>
+              Available Worldwide
+            </span>
           </div>
         </div>
 
@@ -59,7 +110,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   </section>
 
   <!-- Book Description -->
-  <section class="section">
+  <section class="section" style="padding-top: 2.5rem;">
     <div class="container">
       <div class="author-content">
 
@@ -102,24 +153,9 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
               <a href="https://www.vidiyal-children.org/" target="_blank" rel="noopener noreferrer" style="color: var(--color-coral); font-weight: 700;">Sakthi Vidiyal</a>, a Madurai-based NGO.
               This book was born in Madurai. It gives back to Madurai.
             </p>
-            <div class="author-buy-btns author-buy-btns--stacked">
-              <a
-                href="https://www.amazon.com/dp/B0H4M6DTHF"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="btn btn-primary"
-              >
-                Buy on Amazon.com
-              </a>
-              <a
-                href="https://www.amazon.in/dp/B0H42J2PV1/ref=sr_1_1?crid=2VP3K06IJPCK&dib=eyJ2IjoiMSJ9.KTxKs3x2XfeMsp0C3AiynwI7laX1vNLmk-RY6eFZul4d_MIlFDf4C9p4CwwmATZmd7RYTWGHl76pYrjtu5fXqNfkLtBZ9q46c5YsPmcaevs.DsZr49g9YefIkGAh53cPIzs8CRzmYPxjBHtexRcnOw8&dib_tag=se&keywords=The+legend+of+Meenakshi&qid=1781021057&sprefix=the+legend+of+meenakshi%2Caps%2C240&sr=8-1"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="btn btn-outline"
-              >
-                Buy on Amazon.in
-              </a>
-            </div>
+            <a href="#buy" class="btn btn-primary" style="justify-content: center; width: 100%;">
+              See Buying Options ↑
+            </a>
           </div>
         </aside>
 
@@ -133,7 +169,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   /* ── Author Hero ── */
   .author-hero {
     background: linear-gradient(160deg, #FFF7F5 0%, #FFF3F0 40%, #FAFAFA 100%);
-    padding: calc(var(--section-gap) * 1.1) 0;
+    padding: calc(var(--section-gap) * 1.1) 0 2.5rem;
   }
 
   .author-hero-inner {
@@ -207,12 +243,99 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     font-style: italic;
   }
 
-  /* Buy buttons */
-  .author-buy-btns {
+  /* Buy cards */
+  .buy-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 1rem;
+    scroll-margin-top: calc(var(--nav-height) + 1.5rem);
+  }
+
+  .buy-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.6rem;
+    height: 100%;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 1.75rem 1.25rem 1.5rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .buy-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+  }
+
+  .buy-card-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.25rem;
+  }
+
+  .buy-card--amazon-com .buy-card-icon { background: #1A1A2E; }
+  .buy-card--amazon-in .buy-card-icon { background: var(--color-coral); }
+  .buy-card--pothi .buy-card-icon { background: #2F6F4F; }
+
+  .buy-card-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .buy-card-sub {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+  }
+
+  .buy-card-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: auto;
+    padding: 0.65rem 1rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #fff;
+    transition: opacity 0.15s ease;
+  }
+
+  .buy-card:hover .buy-card-cta {
+    opacity: 0.9;
+  }
+
+  .buy-card-cta--dark { background: #1A1A2E; }
+  .buy-card-cta--coral { background: var(--color-coral); }
+  .buy-card-cta--green { background: #2F6F4F; }
+
+  /* Trust strip */
+  .buy-trust-strip {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.85rem;
     justify-content: center;
+    gap: 0.5rem 1.5rem;
+    margin-top: 1.75rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
   }
 
   /* ── Content section ── */
@@ -290,15 +413,6 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     font-weight: 700;
   }
 
-  .author-buy-btns--stacked {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .author-buy-btns--stacked .btn {
-    justify-content: center;
-  }
-
   /* ── Responsive ── */
   @media (min-width: 768px) {
     .author-hero-inner {
@@ -317,8 +431,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       max-width: 520px;
     }
 
-    .author-buy-btns {
-      justify-content: flex-start;
+    .buy-cards {
+      grid-template-columns: repeat(3, minmax(160px, 1fr));
     }
 
     .author-content {
