@@ -1100,6 +1100,10 @@ p {
   letter-spacing: -0.02em;
 }
 
+.hero-headline--sm {
+  font-size: clamp(1.8rem, 4vw, 2.85rem);
+}
+
 .hero-subhead {
   font-size: clamp(1.2rem, 2.5vw, 1.6rem);
   font-weight: 700;
