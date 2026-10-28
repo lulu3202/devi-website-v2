@@ -1,0 +1,343 @@
+---
+import giving from '@data/giving.json';
+
+interface GivingEntry {
+  year: number;
+  period: string;
+  print: number;
+  ebook: number;
+  total: number;
+  donatedDate: string;
+}
+
+const entries = [...(giving as GivingEntry[])].sort((a, b) => a.year - b.year);
+
+for (const e of entries) {
+  if (Math.abs(e.print + e.ebook - e.total) > 0.005) {
+    console.warn(`[giving.json] ${e.year}: print + ebook (${e.print + e.ebook}) does not match total (${e.total})`);
+  }
+}
+
+const inr = new Intl.NumberFormat('en-IN', {
+  style: 'currency',
+  currency: 'INR',
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+});
+
+const grandTotal = entries.reduce((sum, e) => sum + e.total, 0);
+
+// Chart geometry (SVG user units, rendered 1:1 — bars never stretch).
+// Fixed bar width; each new year adds a bar to the right.
+const barW = 44;
+const barGap = 40;
+const padLeft = 20;
+const minW = 240;
+const H = 200;
+const padTop = 28;
+const padBottom = 28;
+const plotH = H - padTop - padBottom;
+const max = Math.max(...entries.map((e) => e.total), 1);
+const W = Math.max(minW, padLeft * 2 + entries.length * barW + (entries.length - 1) * barGap);
+
+const bars = entries.map((e, i) => {
+  const x = padLeft + i * (barW + barGap);
+  const printH = (e.print / max) * plotH;
+  const ebookH = (e.ebook / max) * plotH;
+  const baseY = padTop + plotH;
+  return {
+    ...e,
+    x,
+    cx: x + barW / 2,
+    printY: baseY - printH,
+    printH,
+    ebookY: baseY - printH - ebookH,
+    ebookH,
+    baseY,
+  };
+});
+
+const chartLabel = entries
+  .map((e) => `${e.year}: ${inr.format(e.print)} print, ${inr.format(e.ebook)} ebook, ${inr.format(e.total)} total`)
+  .join('; ');
+---
+
+<section class="giving" id="giving" aria-labelledby="giving-title">
+  <h3 class="giving-title" id="giving-title">The promise, in numbers</h3>
+  <p class="giving-total">
+    <span class="giving-total-amount">{inr.format(grandTotal)}</span>
+    donated from royalties so far
+  </p>
+
+  <div class="giving-grid">
+    <figure class="giving-chart">
+      <ul class="giving-legend">
+        <li><span class="swatch swatch--print"></span>Print (Pothi.com, India)</li>
+        <li><span class="swatch swatch--ebook"></span>Ebook (Amazon Kindle, worldwide)</li>
+      </ul>
+      <div class="giving-chart-scroll">
+      <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} role="img" aria-label={`Royalties donated per year. ${chartLabel}`}>
+        <line class="axis" x1="0" x2={W} y1={padTop + plotH} y2={padTop + plotH} />
+        {bars.map((b) => (
+          <g>
+            <rect class="bar bar--print" x={b.x} y={b.printY} width={barW} height={b.printH} />
+            <rect class="bar bar--ebook" x={b.x} y={b.ebookY} width={barW} height={b.ebookH} />
+            <text class="bar-total" x={b.cx} y={b.ebookY - 8} text-anchor="middle">{inr.format(b.total)}</text>
+            <text class="bar-year" x={b.cx} y={b.baseY + 18} text-anchor="middle">{b.year}</text>
+          </g>
+        ))}
+      </svg>
+      </div>
+    </figure>
+
+    <div class="giving-ledger">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Year</th>
+            <th scope="col" class="col-period">Royalty period</th>
+            <th scope="col" class="num">Print</th>
+            <th scope="col" class="num">Ebook</th>
+            <th scope="col" class="num">Donated</th>
+          </tr>
+        </thead>
+        <tbody>
+          {[...entries].reverse().map((e) => (
+            <tr>
+              <th scope="row">
+                {e.year}
+                <span class="period-inline">{e.period}</span>
+              </th>
+              <td class="col-period">{e.period}</td>
+              <td class="num">{inr.format(e.print)}</td>
+              <td class="num">{inr.format(e.ebook)}</td>
+              <td class="num">
+                <strong>{inr.format(e.total)}</strong>
+                <span class="donated-date">{e.donatedDate}</span>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <p class="giving-note">
+    Royalties arrive 1–2 months after sales, so each year covers payments received up to the end of October.
+  </p>
+</section>
+
+<style>
+  .giving {
+    --giving-print: #2F6F4F;
+    --giving-ebook: var(--color-coral);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card);
+    padding: 2rem;
+    scroll-margin-top: calc(var(--nav-height) + 1.5rem);
+  }
+
+  .giving-title {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-coral);
+    margin-bottom: 0.5rem;
+  }
+
+  .giving-total {
+    font-size: 1.05rem;
+    color: var(--color-text-muted);
+    margin-bottom: 1.75rem;
+  }
+
+  .giving-total-amount {
+    display: block;
+    font-size: clamp(1.6rem, 4vw, 2.1rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+    line-height: 1.2;
+  }
+
+  .giving-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  /* Chart */
+  .giving-chart {
+    margin: 0;
+    min-width: 0;
+  }
+
+  /* Many years: scroll sideways instead of shrinking the bars */
+  .giving-chart-scroll {
+    overflow-x: auto;
+  }
+
+  .giving-legend {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.25rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+  }
+
+  .giving-legend li {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+
+  .swatch {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+
+  .swatch--print { background: var(--giving-print); }
+  .swatch--ebook { background: var(--giving-ebook); }
+
+  .giving-chart svg {
+    display: block;
+    overflow: visible;
+  }
+
+  .axis {
+    stroke: var(--color-border);
+    stroke-width: 1;
+  }
+
+  .bar--print { fill: var(--giving-print); }
+  .bar--ebook { fill: var(--giving-ebook); }
+
+  .bar-total {
+    font-size: 13px;
+    font-weight: 700;
+    fill: var(--color-text);
+  }
+
+  .bar-year {
+    font-size: 12px;
+    font-weight: 600;
+    fill: var(--color-text-muted);
+  }
+
+  /* Ledger */
+  .giving-ledger {
+    overflow-x: auto;
+  }
+
+  .giving-ledger table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .giving-ledger th,
+  .giving-ledger td {
+    padding: 0.6rem 0.5rem;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+  }
+
+  .giving-ledger th:first-child,
+  .giving-ledger td:first-child {
+    padding-left: 0;
+  }
+
+  .giving-ledger th:last-child,
+  .giving-ledger td:last-child {
+    padding-right: 0;
+  }
+
+  .giving-ledger thead th {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  .giving-ledger tbody th {
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .giving-ledger .num {
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .giving-ledger strong {
+    color: var(--color-text);
+    font-weight: 700;
+  }
+
+  .donated-date {
+    display: block;
+  }
+
+  .period-inline {
+    display: none;
+  }
+
+  .donated-date,
+  .period-inline {
+    font-weight: 400;
+    font-size: 0.78rem;
+    color: var(--color-text-muted);
+  }
+
+  .giving-note {
+    margin-top: 1.5rem;
+    font-size: 0.82rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 480px) {
+    .giving {
+      padding: 1.5rem 1.25rem;
+    }
+
+    .giving-ledger table {
+      font-size: 0.8rem;
+    }
+
+    .giving-ledger th,
+    .giving-ledger td {
+      padding: 0.55rem 0.3rem;
+    }
+
+    /* Fold the period under the year so all amounts fit */
+    .giving-ledger .col-period {
+      display: none;
+    }
+
+    .period-inline {
+      display: block;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .giving-grid {
+      grid-template-columns: minmax(0, auto) 1fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+  }
+</style>
